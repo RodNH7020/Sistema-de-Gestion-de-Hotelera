@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CapaDatos/CapaDatos.vbproj" />
+  <Project Path="CapaNegocio/CapaNegocio.vbproj" />
+  <Project Path="CapaPresentacion/CapaPresentacion.vbproj" />
+  <Project Path="SistemaHotelero/CapaEntidades.vbproj" />
+</Solution>
