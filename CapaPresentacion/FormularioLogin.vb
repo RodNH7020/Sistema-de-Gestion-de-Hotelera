@@ -5,6 +5,20 @@ Imports SistemaHotelero
 Public Class FormularioLogin
 
     Private Sub BIniciarSesion_Click(sender As Object, e As EventArgs) Handles BIniciarSesion.Click
+        ' 1. Validación de campos vacíos en la capa de presentación (UI)
+        If String.IsNullOrWhiteSpace(TUsuario.Text) Then
+            MessageBox.Show("Por favor, ingrese su nombre de usuario.", "Campo Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            TUsuario.Focus()
+            Exit Sub
+        End If
+
+        If String.IsNullOrWhiteSpace(TContraseña.Text) Then
+            MessageBox.Show("Por favor, ingrese su contraseña.", "Campo Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            TContraseña.Focus()
+            Exit Sub
+        End If
+
+        ' 2. Proceso de autenticación
         Try
             ' Instanciamos la capa de negocio de usuarios
             Dim usuarioNeg As New UsuarioNegocio()
@@ -14,7 +28,7 @@ Public Class FormularioLogin
 
             If userLogueado IsNot Nothing Then
                 MessageBox.Show("¡Bienvenido al sistema, " & userLogueado.nombreUsuario & "!",
-                                "Acceso Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            "Acceso Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Aquí posteriormente abriremos el formulario principal o de reservas
                 ' Dim frmReserva As New FrmRegistrarReserva()

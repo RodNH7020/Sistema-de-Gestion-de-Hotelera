@@ -1,4 +1,5 @@
-﻿Imports CapaEntidades
+﻿Imports System.Data
+Imports CapaEntidades
 Imports Microsoft.Data.SqlClient
 Imports SistemaHotelero
 
@@ -37,5 +38,31 @@ Public Class ReservaDatos
                 Return cmd.ExecuteNonQuery() > 0
             End Using
         End Using
+    End Function
+
+    ' Filtrar reservas activas 
+    Public Function ListarReservasActivas(Optional filtro As String = "") As DataTable
+        Dim dt As New DataTable
+        Dim query As String = "SELECT r.id_reservas, h.nombre_completo AS Huésped, hab.numero AS Habitacion, r.fecha_ingreso, r.fecha_salida, r.estado " &
+                              "FROM Reserva r " &
+                              "INNER JOIN Huesped h ON r.id_huesped = h.id_huesped " &
+                              "INNER JOIN Habitacion hab ON r.id_habitacion = hab.id_habitacion " &
+                              "WHERE r.estado = 'Activa'"
+
+        If Not String.IsNullOrWhiteSpace(filtro) Then
+            query &= " AND (h.nombre_completo LIKE @filtro OR hab.numero LIKE @filtro)"
+        End If
+
+        Using con As SqlConnection = conexionBD.ObtenerConexion()
+            Using cmd As New SqlCommand(query, con)
+                If Not String.IsNullOrWhiteSpace(filtro) Then
+                    cmd.Parameters.AddWithValue("@filtro", "%" & filtro & "%")
+                End If
+                Using da As New SqlDataAdapter(cmd)
+                    da.Fill(dt)
+                End Using
+            End Using
+        End Using
+        Return dt
     End Function
 End Class
