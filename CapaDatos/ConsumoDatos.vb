@@ -1,4 +1,4 @@
-﻿Imports CapaEntidades
+﻿
 Imports Microsoft.Data.SqlClient
 Imports SistemaHotelero
 
