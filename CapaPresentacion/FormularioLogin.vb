@@ -26,15 +26,16 @@ Public Class FormularioLogin
             ' Validamos contra la base de datos usando el método que armamos en la capa de negocio
             Dim userLogueado As Usuario = usuarioNeg.ValidarLogin(TUsuario.Text.Trim(), TContraseña.Text.Trim())
 
+            ' Si el login es exitoso:
             If userLogueado IsNot Nothing Then
                 MessageBox.Show("¡Bienvenido al sistema, " & userLogueado.nombreUsuario & "!",
-                            "Acceso Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    "Acceso Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                ' Aquí posteriormente abriremos el formulario principal o de reservas
-                ' Dim frmReserva As New FrmRegistrarReserva()
-                ' frmReserva.Show()
+                ' 1. Instanciamos y mostramos el Menú Principal
+                Dim menuPrincipal As New FrmMenuPrincipal()
+                menuPrincipal.Show()
 
-                ' Ocultamos la ventana de login actual
+                ' 2. Ocultamos el formulario de login actual
                 Me.Hide()
             End If
         Catch ex As Exception
