@@ -37,6 +37,7 @@ Partial Class FrmEmitirFactura
         Me.lblRazonSocial = New System.Windows.Forms.Label()
         Me.txtRazonSocial = New System.Windows.Forms.TextBox()
         Me.btnEmitirFactura = New System.Windows.Forms.Button()
+        Me.btnImprimirPdf = New System.Windows.Forms.Button()
         Me.pnlMensajeExito = New System.Windows.Forms.Panel()
         Me.lblMensajeExito = New System.Windows.Forms.Label()
         Me.pnlMensajeError = New System.Windows.Forms.Panel()
@@ -226,22 +227,37 @@ Partial Class FrmEmitirFactura
         Me.btnEmitirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEmitirFactura.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
         Me.btnEmitirFactura.ForeColor = System.Drawing.Color.White
-        Me.btnEmitirFactura.Location = New System.Drawing.Point(170, 295)
+        Me.btnEmitirFactura.Location = New System.Drawing.Point(170, 355)
         Me.btnEmitirFactura.Name = "btnEmitirFactura"
-        Me.btnEmitirFactura.Size = New System.Drawing.Size(245, 38)
+        Me.btnEmitirFactura.Size = New System.Drawing.Size(120, 36)
         Me.btnEmitirFactura.TabIndex = 18
         Me.btnEmitirFactura.Text = "Emitir Factura"
         Me.btnEmitirFactura.UseVisualStyleBackColor = False
+        '
+        'btnImprimirPdf
+        '
+        Me.btnImprimirPdf.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.btnImprimirPdf.Enabled = False
+        Me.btnImprimirPdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimirPdf.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnImprimirPdf.ForeColor = System.Drawing.Color.White
+        Me.btnImprimirPdf.Location = New System.Drawing.Point(295, 355)
+        Me.btnImprimirPdf.Name = "btnImprimirPdf"
+        Me.btnImprimirPdf.Size = New System.Drawing.Size(120, 36)
+        Me.btnImprimirPdf.TabIndex = 19
+        Me.btnImprimirPdf.Text = "Imprimir PDF"
+        Me.btnImprimirPdf.UseVisualStyleBackColor = False
         '
         'pnlMensajeExito
         '
         Me.pnlMensajeExito.BackColor = System.Drawing.Color.FromArgb(CType(CType(212, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(218, Byte), Integer))
         Me.pnlMensajeExito.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlMensajeExito.Controls.Add(Me.lblMensajeExito)
-        Me.pnlMensajeExito.Location = New System.Drawing.Point(35, 345)
+        Me.pnlMensajeExito.Location = New System.Drawing.Point(35, 405)
         Me.pnlMensajeExito.Name = "pnlMensajeExito"
         Me.pnlMensajeExito.Size = New System.Drawing.Size(380, 30)
-        Me.pnlMensajeExito.TabIndex = 19
+        Me.pnlMensajeExito.TabIndex = 20
+        Me.pnlMensajeExito.Visible = False
         '
         'lblMensajeExito
         '
@@ -260,10 +276,11 @@ Partial Class FrmEmitirFactura
         Me.pnlMensajeError.BackColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(218, Byte), Integer))
         Me.pnlMensajeError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlMensajeError.Controls.Add(Me.lblMensajeError)
-        Me.pnlMensajeError.Location = New System.Drawing.Point(35, 383)
+        Me.pnlMensajeError.Location = New System.Drawing.Point(35, 405)
         Me.pnlMensajeError.Name = "pnlMensajeError"
         Me.pnlMensajeError.Size = New System.Drawing.Size(380, 30)
-        Me.pnlMensajeError.TabIndex = 20
+        Me.pnlMensajeError.TabIndex = 21
+        Me.pnlMensajeError.Visible = False
         '
         'lblMensajeError
         '
@@ -281,9 +298,10 @@ Partial Class FrmEmitirFactura
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(460, 430)
+        Me.ClientSize = New System.Drawing.Size(460, 455)
         Me.Controls.Add(Me.pnlMensajeError)
         Me.Controls.Add(Me.pnlMensajeExito)
+        Me.Controls.Add(Me.btnImprimirPdf)
         Me.Controls.Add(Me.btnEmitirFactura)
         Me.Controls.Add(Me.txtRazonSocial)
         Me.Controls.Add(Me.lblRazonSocial)
@@ -337,6 +355,7 @@ Partial Class FrmEmitirFactura
     Friend WithEvents lblRazonSocial As System.Windows.Forms.Label
     Friend WithEvents txtRazonSocial As System.Windows.Forms.TextBox
     Friend WithEvents btnEmitirFactura As System.Windows.Forms.Button
+    Friend WithEvents btnImprimirPdf As System.Windows.Forms.Button
     Friend WithEvents pnlMensajeExito As System.Windows.Forms.Panel
     Friend WithEvents lblMensajeExito As System.Windows.Forms.Label
     Friend WithEvents pnlMensajeError As System.Windows.Forms.Panel
