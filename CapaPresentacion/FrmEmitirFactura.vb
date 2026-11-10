@@ -19,31 +19,25 @@ Public Class FrmEmitirFactura
     Private idEstadiaActual As Integer = 0
 
     Private Sub FrmEmitirFactura_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Opciones de Factura A y B
         cboTipoFactura.Items.Clear()
         cboTipoFactura.Items.Add("Factura B (Consumidor Final)")
         cboTipoFactura.Items.Add("Factura A (Responsable Inscripto)")
 
-        ' Ocultar paneles de notificación al inicio
         pnlMensajeExito.Visible = False
         pnlMensajeError.Visible = False
         btnImprimirPdf.Enabled = False
 
-        ' Seleccionar Factura B por defecto (dispara automáticamente SelectedIndexChanged)
         cboTipoFactura.SelectedIndex = 0
     End Sub
 
-    ' Validación: Solo caracteres numéricos en el ID de Estadía
     Private Sub txtIdEstadia_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtIdEstadia.KeyPress
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    ' Manejo dinámico entre Factura A y B
     Private Sub cboTipoFactura_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTipoFactura.SelectedIndexChanged
         If cboTipoFactura.SelectedIndex = 1 Then
-            ' --- FACTURA A: CUIT y Razón Social activos en blanco para escribir ---
             txtCuit.Enabled = True
             txtRazonSocial.Enabled = True
             txtCuit.ReadOnly = False
@@ -56,7 +50,6 @@ Public Class FrmEmitirFactura
             txtRazonSocial.Text = ""
             txtCuit.Focus()
         Else
-            ' --- FACTURA B: Cuadros atenuados con texto gris informativo ---
             txtCuit.Enabled = True
             txtRazonSocial.Enabled = True
             txtCuit.ReadOnly = True
@@ -70,7 +63,6 @@ Public Class FrmEmitirFactura
         End If
     End Sub
 
-    ' Buscar estadía en base de datos
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         OcultarMensajes()
 
@@ -95,11 +87,7 @@ Public Class FrmEmitirFactura
             End If
 
             idEstadiaActual = idEst
-
-            ' Obtener anticipos previos registrados
             anticipoCalculado = negocioPago.ObtenerTotalPagado(idEst)
-
-            ' Importe total de la estadía
             totalBrutoCalculado = 250000D
             saldoPendiente = Math.Max(0D, totalBrutoCalculado - anticipoCalculado)
 
@@ -115,7 +103,6 @@ Public Class FrmEmitirFactura
         End Try
     End Sub
 
-    ' Emitir la Factura cumpliendo las reglas de negocio
     Private Sub btnEmitirFactura_Click(sender As Object, e As EventArgs) Handles btnEmitirFactura.Click
         OcultarMensajes()
 
@@ -124,7 +111,6 @@ Public Class FrmEmitirFactura
             Return
         End If
 
-        ' Validación fiscal para Factura A
         Dim cuitAEnviar As String = ""
         Dim razonAEnviar As String = ""
 
@@ -139,7 +125,6 @@ Public Class FrmEmitirFactura
         End If
 
         Try
-            ' Crear lista de detalles según columnas de FACTURA_DETALLE
             Dim listaDetalles As New List(Of Factura_Detalle)()
             Dim detalleItem As New Factura_Detalle() With {
                 .cantidad = 1,
@@ -148,7 +133,6 @@ Public Class FrmEmitirFactura
             }
             listaDetalles.Add(detalleItem)
 
-            ' Llamada al método de negocio existente
             Dim resultado As String = negocioFactura.EmitirFactura(idEstadiaActual, totalBrutoCalculado, listaDetalles)
 
             If resultado = "OK" Then
@@ -163,72 +147,159 @@ Public Class FrmEmitirFactura
         End Try
     End Sub
 
-    ' Generar e imprimir PDF
     Private Sub btnImprimirPdf_Click(sender As Object, e As EventArgs) Handles btnImprimirPdf.Click
         Try
-            Dim printDlg As New PrintDialog()
-            printDlg.Document = docPrint
-
-            docPrint.PrinterSettings.PrinterName = "Microsoft Print to PDF"
-
-            If docPrint.PrinterSettings.IsValid Then
-                docPrint.Print()
-            Else
-                If printDlg.ShowDialog() = DialogResult.OK Then
-                    docPrint.Print()
-                End If
-            End If
+            Dim vistaPrevia As New PrintPreviewDialog()
+            vistaPrevia.Document = docPrint
+            vistaPrevia.WindowState = FormWindowState.Maximized
+            vistaPrevia.ShowDialog()
         Catch ex As Exception
             MostrarError("No se pudo generar el documento PDF: " & ex.Message)
         End Try
     End Sub
 
-    ' Formato gráfico para el documento de impresión/PDF
     Private Sub docPrint_PrintPage(sender As Object, e As PrintPageEventArgs) Handles docPrint.PrintPage
-        Dim g = e.Graphics
-        Dim fontTitulo As New Font("Segoe UI", 16, FontStyle.Bold)
-        Dim fontSub As New Font("Segoe UI", 12, FontStyle.Bold)
-        Dim fontNormal As New Font("Segoe UI", 10, FontStyle.Regular)
-        Dim fontBold As New Font("Segoe UI", 10, FontStyle.Bold)
+        Dim g As Graphics = e.Graphics
+        Dim penBorde As New Pen(Color.Black, 1.5F)
+        Dim penFino As New Pen(Color.Black, 0.8F)
+        Dim penGris As New Pen(Color.LightGray, 0.8F)
 
-        Dim y As Integer = 50
+        Dim fLetraCentral As New Font("Arial", 22, FontStyle.Bold)
+        Dim fTitulo As New Font("Arial", 14, FontStyle.Bold)
+        Dim fBold As New Font("Arial", 9, FontStyle.Bold)
+        Dim fRegular As New Font("Arial", 8.5F, FontStyle.Regular)
+        Dim fMini As New Font("Arial", 7, FontStyle.Regular)
+        Dim fMiniBold As New Font("Arial", 7, FontStyle.Bold)
+        Dim fTotal As New Font("Arial", 12, FontStyle.Bold)
 
-        ' Encabezado
-        g.DrawString("HOTEL SISTEMA HOTELERO", fontTitulo, Brushes.Black, 50, y)
-        y += 35
-        g.DrawString("COMPROBANTE DE FACTURACIÓN", fontSub, Brushes.Black, 50, y)
-        y += 30
-        g.DrawLine(Pens.Black, 50, y, 750, y)
-        y += 20
+        Dim x As Integer = 40
+        Dim y As Integer = 40
+        Dim ancho As Integer = 740
 
-        ' Datos generales
-        g.DrawString("Fecha de Emisión: " & DateTime.Now.ToString("dd/MM/yyyy HH:mm"), fontNormal, Brushes.Black, 50, y)
-        g.DrawString("Tipo: " & cboTipoFactura.SelectedItem.ToString(), fontBold, Brushes.Black, 400, y)
-        y += 25
-        g.DrawString("Estadía N°: " & idEstadiaActual.ToString(), fontNormal, Brushes.Black, 50, y)
+        ' 1. Marco exterior
+        g.DrawRectangle(penBorde, x, y, ancho, 1000)
 
-        If cboTipoFactura.SelectedIndex = 1 Then
-            y += 25
-            g.DrawString("CUIT: " & txtCuit.Text.Trim(), fontNormal, Brushes.Black, 50, y)
-            g.DrawString("Razón Social: " & txtRazonSocial.Text.Trim(), fontNormal, Brushes.Black, 400, y)
+        ' 2. Cuadro letra central
+        Dim esFacturaA As Boolean = (cboTipoFactura.SelectedIndex = 1)
+        Dim letraTipo As String = If(esFacturaA, "A", "B")
+        Dim codTipo As String = If(esFacturaA, "COD. 01", "COD. 06")
+
+        Dim centroX As Integer = x + (ancho \ 2)
+        Dim anchoBox As Integer = 46
+        Dim altoBox As Integer = 42
+        Dim boxX As Integer = centroX - (anchoBox \ 2)
+
+        g.FillRectangle(Brushes.WhiteSmoke, boxX, y, anchoBox, altoBox)
+        g.DrawRectangle(penBorde, boxX, y, anchoBox, altoBox)
+
+        Dim sfCentro As New StringFormat() With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
+        g.DrawString(letraTipo, fLetraCentral, Brushes.Black, New RectangleF(boxX, y + 2, anchoBox, altoBox - 14), sfCentro)
+        g.DrawRectangle(penFino, boxX, y + altoBox - 14, anchoBox, 14)
+        g.DrawString(codTipo, fMiniBold, Brushes.Black, New RectangleF(boxX, y + altoBox - 14, anchoBox, 14), sfCentro)
+
+        g.DrawLine(penBorde, centroX, y + altoBox, centroX, y + 160)
+
+        ' Datos Hotel Tekoha
+        g.DrawString("HOTEL TEKOHA", fTitulo, Brushes.Black, x + 15, y + 15)
+        g.DrawString("Razón Social: Hotel Tekoha S.R.L.", fMiniBold, Brushes.Black, x + 15, y + 38)
+        g.DrawString("Dirección: Costanera Gral. San Martín 1250", fRegular, Brushes.Black, x + 15, y + 54)
+        g.DrawString("Corrientes (3400) - Corrientes, Argentina", fRegular, Brushes.Black, x + 15, y + 70)
+        g.DrawString("Tel: (0379) 442-8899 | Web: www.hoteltekoha.com.ar", fMini, Brushes.Black, x + 15, y + 86)
+        g.DrawString("E-mail: facturacion@hoteltekoha.com.ar", fMini, Brushes.Black, x + 15, y + 102)
+        g.DrawString("I.V.A. RESPONSABLE INSCRIPTO", fBold, Brushes.Black, x + 15, y + 130)
+
+        ' Datos Factura
+        g.DrawString("FACTURA", fTitulo, Brushes.Black, centroX + 30, y + 15)
+        Dim nroFactura As String = "N° 0001 - " & idEstadiaActual.ToString().PadLeft(8, "0"c)
+        g.DrawString(nroFactura, fTitulo, Brushes.Black, centroX + 30, y + 40)
+
+        g.DrawString("Fecha de Emisión: " & DateTime.Now.ToString("dd/MM/yyyy"), fBold, Brushes.Black, centroX + 30, y + 70)
+        g.DrawString("C.U.I.T.: 30-71464172-3", fRegular, Brushes.Black, centroX + 30, y + 90)
+        g.DrawString("Ingresos Brutos: 30-71464172-3", fRegular, Brushes.Black, centroX + 30, y + 106)
+        g.DrawString("Inicio de Actividades: 10/2014", fRegular, Brushes.Black, centroX + 30, y + 122)
+
+        g.DrawLine(penBorde, x, y + 160, x + ancho, y + 160)
+
+        ' 3. Cliente
+        Dim yCli As Integer = y + 165
+        Dim clienteNombre As String = If(esFacturaA, txtRazonSocial.Text.Trim(), "CONSUMIDOR FINAL")
+        Dim clienteCuit As String = If(esFacturaA, txtCuit.Text.Trim(), "—")
+        Dim condicionIva As String = If(esFacturaA, "Responsable Inscripto", "Consumidor Final")
+
+        g.DrawString("Señor(es): " & clienteNombre, fBold, Brushes.Black, x + 15, yCli)
+        g.DrawString("CUIT / Documento: " & clienteCuit, fRegular, Brushes.Black, centroX + 30, yCli)
+        yCli += 20
+
+        g.DrawString("Domicilio: Pellegrini 1450 - Corrientes", fRegular, Brushes.Black, x + 15, yCli)
+        g.DrawString("Condición de IVA: " & condicionIva, fRegular, Brushes.Black, centroX + 30, yCli)
+        yCli += 20
+
+        g.DrawString("Condiciones de Venta: Contado [X]  Tarjeta/Transf. [ ]   |   Estadía N°: " & idEstadiaActual, fRegular, Brushes.Black, x + 15, yCli)
+        yCli += 25
+        g.DrawLine(penBorde, x, yCli, x + ancho, yCli)
+
+        ' 4. Grilla
+        Dim yTabla As Integer = yCli
+        Dim altoHeaderTabla As Integer = 24
+
+        g.FillRectangle(Brushes.Gainsboro, x, yTabla, ancho, altoHeaderTabla)
+        g.DrawRectangle(penBorde, x, yTabla, ancho, altoHeaderTabla)
+
+        g.DrawString("CANT.", fBold, Brushes.Black, x + 10, yTabla + 5)
+        g.DrawString("DESCRIPCIÓN / CONCEPTO", fBold, Brushes.Black, x + 80, yTabla + 5)
+        g.DrawString("P. UNITARIO", fBold, Brushes.Black, x + 510, yTabla + 5)
+        g.DrawString("IMPORTE", fBold, Brushes.Black, x + 640, yTabla + 5)
+
+        g.DrawLine(penFino, x + 65, yTabla, x + 65, yTabla + 580)
+        g.DrawLine(penFino, x + 490, yTabla, x + 490, yTabla + 580)
+        g.DrawLine(penFino, x + 620, yTabla, x + 620, yTabla + 580)
+
+        Dim yItem As Integer = yTabla + altoHeaderTabla + 12
+        g.DrawString("1", fRegular, Brushes.Black, x + 25, yItem)
+        g.DrawString(If(String.IsNullOrEmpty(txtConcepto.Text), "Servicio de Hospedaje y Estadía", txtConcepto.Text), fRegular, Brushes.Black, x + 80, yItem)
+        g.DrawString(totalBrutoCalculado.ToString("C2"), fRegular, Brushes.Black, x + 500, yItem)
+        g.DrawString(totalBrutoCalculado.ToString("C2"), fRegular, Brushes.Black, x + 630, yItem)
+        yItem += 26
+
+        If anticipoCalculado > 0 Then
+            g.DrawString("1", fRegular, Brushes.Black, x + 25, yItem)
+            g.DrawString("Deducción de Anticipo abonado al momento del Check-in (50%)", fRegular, Brushes.Black, x + 80, yItem)
+            g.DrawString("-" & anticipoCalculado.ToString("C2"), fRegular, Brushes.Black, x + 500, yItem)
+            g.DrawString("-" & anticipoCalculado.ToString("C2"), fRegular, Brushes.Black, x + 630, yItem)
+            yItem += 26
         End If
 
-        y += 35
-        g.DrawLine(Pens.Black, 50, y, 750, y)
-        y += 20
+        Dim yFinTabla As Integer = yTabla + 580
+        g.DrawLine(penBorde, x, yFinTabla, x + ancho, yFinTabla)
 
-        ' Valores monetarios
-        g.DrawString("Concepto: " & txtConcepto.Text, fontNormal, Brushes.Black, 50, y)
-        y += 30
-        g.DrawString("Total Bruto: " & txtTotalBruto.Text, fontNormal, Brushes.Black, 50, y)
-        y += 25
-        g.DrawString("Anticipo Abonado: " & txtAnticipo.Text, fontNormal, Brushes.Black, 50, y)
-        y += 30
-        g.DrawLine(Pens.Black, 50, y, 750, y)
-        y += 15
-        g.DrawString("TOTAL A LIQUIDAR: " & txtSaldoPagar.Text, fontSub, Brushes.DarkRed, 50, y)
+        ' 5. Totales
+        Dim yTotales As Integer = yFinTabla
+        Dim altoTotales As Integer = 50
 
-        e.HasMorePages = False
+        g.FillRectangle(Brushes.WhiteSmoke, x + 450, yTotales, 290, altoTotales)
+        g.DrawRectangle(penBorde, x + 450, yTotales, 290, altoTotales)
+
+        g.DrawString("TOTAL A PAGAR: ", fTotal, Brushes.DarkBlue, x + 460, yTotales + 15)
+        g.DrawString(saldoPendiente.ToString("C2"), fTotal, Brushes.DarkRed, x + 600, yTotales + 15)
+
+        ' 6. Código de Barras y CAI
+        Dim yPie As Integer = yTotales + altoTotales + 15
+        Dim barX As Integer = x + 20
+        For i As Integer = 0 To 85
+            Dim grosor As Integer = If(i Mod 3 = 0, 3, 1)
+            g.FillRectangle(Brushes.Black, barX, yPie, grosor, 35)
+            barX += grosor + 2
+        Next
+        g.DrawString("3071464172306000142513082377220261215", fMini, Brushes.Black, x + 20, yPie + 38)
+
+        Dim boxCaiX As Integer = x + 480
+        g.DrawRectangle(penFino, boxCaiX, yPie, 240, 48)
+        g.DrawString("C.A.I. N°: 42513082377220", fBold, Brushes.Black, boxCaiX + 10, yPie + 8)
+        g.DrawString("Fecha de Vto. C.A.I.: 15/12/2026", fBold, Brushes.Black, boxCaiX + 10, yPie + 26)
+
+        Dim yLegal As Integer = yPie + 60
+        g.DrawLine(penGris, x, yLegal, x + ancho, yLegal)
+        g.DrawString("ORIGINAL BLANCO - Comprobante oficial de facturación. Hotel Tekoha S.R.L.", fMini, Brushes.DimGray, x + 15, yLegal + 5)
     End Sub
 
     Private Sub MostrarExito(msg As String)
@@ -255,7 +326,6 @@ Public Class FrmEmitirFactura
         txtAnticipo.Clear()
         txtSaldoPagar.Clear()
         btnImprimirPdf.Enabled = False
-        ' Restablecer estado de Factura según la selección activa
         cboTipoFactura_SelectedIndexChanged(Nothing, Nothing)
     End Sub
 
