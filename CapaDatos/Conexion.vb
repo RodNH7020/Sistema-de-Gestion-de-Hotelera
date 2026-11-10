@@ -1,7 +1,7 @@
 ﻿Imports Microsoft.Data.SqlClient
 
 Public Class Conexion
-    Private ReadOnly Cadena As String = "Data Source=.\SQLEXPRESS;Initial Catalog=SistemaHotelero;Integrated Security=True;"
+    Private ReadOnly Cadena As String = "Data Source=NEWGAME\SQLEXPRESS01;Initial Catalog=SistemaHotelero;Integrated Security=True;TrustServerCertificate=True;"
 
     Public Function ObtenerConexion() As SqlConnection
         Return New SqlConnection(Cadena)
