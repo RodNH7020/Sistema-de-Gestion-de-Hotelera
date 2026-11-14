@@ -4,6 +4,9 @@
     <RootNamespace>CapaPresentacion</RootNamespace>
 	<TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CapaPresentacion.FormularioLogin</StartupObject>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
   </PropertyGroup>
 
   <ItemGroup>

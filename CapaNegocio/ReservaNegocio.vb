@@ -1,4 +1,5 @@
-﻿Imports CapaDatos
+﻿Imports System.Data
+Imports CapaDatos
 Imports CapaEntidades
 Imports SistemaHotelero
 
@@ -21,11 +22,14 @@ Public Class ReservaNegocio
         Return objReservaDatos.Insertar(r)
     End Function
 
-    Public Function CancelarReserva(idReserva As Integer) As Boolean
-        If idReserva <= 0 Then
-            Throw New ArgumentException("El número de reserva no es válido.")
-        End If
+    Public Function ListarReservasActivas(filtro As String) As DataTable
+        Dim reservaDatos As New ReservaDatos()
+        Return reservaDatos.ListarActivasConFiltro(filtro)
+    End Function
 
-        Return objReservaDatos.CancelarReserva(idReserva)
+    Public Function CancelarReserva(idReserva As Integer) As Boolean
+        ' Lógica para actualizar el estado de la reserva a "Cancelada" o "Anulada"
+        Dim reservaDatos As New ReservaDatos()
+        Return reservaDatos.ActualizarEstado(idReserva, "Cancelada")
     End Function
 End Class

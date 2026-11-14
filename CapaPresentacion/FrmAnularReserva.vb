@@ -11,14 +11,18 @@ Public Class FrmAnularReserva
     Private Sub CargarGrilla(filtro As String)
         Try
             Dim reservaNeg As New ReservaNegocio()
-            ' Asumiendo que pasas el filtro al negocio:
-            ' dgvReservas.DataSource = reservaNeg.ListarReservasActivas(filtro)
+            'Asignamos el resultado al DataSource de la grilla
+            dgvReservas.DataSource = reservaNeg.ListarReservasActivas(filtro)
+
+            ' Opcional: Ajustar nombres de columnas si es necesario para el botón anular
+            If dgvReservas.Columns.Contains("id_reserva") Then
+                dgvReservas.Columns("id_reserva").Visible = False ' Ocultar la columna id_reserva
+            End If
         Catch ex As Exception
             MessageBox.Show("Error al cargar las reservas: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    ' Evento que se dispara automáticamente cada vez que el usuario escribe en el buscador
     Private Sub TBuscar_TextChanged(sender As Object, e As EventArgs) Handles TBuscar.TextChanged
         CargarGrilla(TBuscar.Text.Trim())
     End Sub
@@ -32,21 +36,26 @@ Public Class FrmAnularReserva
 
         ' 2. Obtener el ID de la reserva y el nombre del huésped desde la fila seleccionada
         Dim fila As DataGridViewRow = dgvReservas.SelectedRows(0)
-        Dim idReserva As Integer = Convert.ToInt32(fila.Cells("id_reservas").Value)
+        Dim idReserva As Integer = Convert.ToInt32(fila.Cells("id_reserva").Value)
         Dim nombreHuesped As Object = fila.Cells("Huésped").Value
 
         ' 3. Confirmación de seguridad
         Dim confirmacion As DialogResult = MessageBox.Show("¿Está seguro de cancelar la reserva del huésped " & nombreHuesped.ToString() & "?",
-                                                           "Confirmar Anulación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                                                       "Confirmar Anulación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
         If confirmacion = DialogResult.Yes Then
             Try
                 Dim reservaNeg As New ReservaNegocio()
+
+                ' Cambiamos la validación para que evalúe si devuelve True correctamente
                 If reservaNeg.CancelarReserva(idReserva) Then
                     MessageBox.Show("Reserva cancelada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Recargar la grilla limpia
                     CargarGrilla(TBuscar.Text.Trim())
+                Else
+                    MessageBox.Show("No se pudo completar la anulación de la reserva.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
+
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try

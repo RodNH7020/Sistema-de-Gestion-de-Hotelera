@@ -23,13 +23,18 @@ Public Class FrmRegistrarReserva
 
     Private Sub CargarCombos()
         Try
-            ' Ejemplo de estructura para poblar los ComboBox cuando tengas las clases de negocio:
-            ' Dim huespedNeg As New HuespedNegocio()
-            ' cboHuesped.DataSource = huespedNeg.ListarHuespedes()
-            ' cboHuesped.DisplayMember = "nombre_completo"
-            ' cboHuesped.ValueMember = "id_huesped"
+            ' Cargar Habitaciones Disponibles
+            Dim habitacionNeg As New HabitacionNegocio()
+            cboHabitacion.DataSource = habitacionNeg.ListarDisponibles()
+            cboHabitacion.DisplayMember = "numero"
+            cboHabitacion.ValueMember = "id_habitacion"
 
-            ' (De momento lo dejamos preparado para tus métodos)
+            ' Cargar Huéspedes
+            Dim huespedNeg As New HuespedNegocio()
+            COBHuesped.DataSource = huespedNeg.ListarHuespedes()
+            COBHuesped.DisplayMember = "apellido"
+            COBHuesped.ValueMember = "id_huesped"
+
         Catch ex As Exception
             MessageBox.Show("Error al cargar los listados: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -54,6 +59,11 @@ Public Class FrmRegistrarReserva
             ' Suponiendo que el ValueMember del combo devuelve el ID numérico:
             reserva.id_huesped = Convert.ToInt32(COBHuesped.SelectedValue)
             reserva.id_habitacion = Convert.ToInt32(cboHabitacion.SelectedValue)
+
+            reserva.id_usuario = SesionActual.IdUsuario
+
+            reserva.fecha_reserva = DateTime.Today
+
             reserva.fecha_ingreso = dtpFechaIngreso.Value.Date
             reserva.fecha_salida = dtpFechaSalida.Value.Date
             reserva.estado = "Activa"

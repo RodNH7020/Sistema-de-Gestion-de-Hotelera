@@ -52,4 +52,33 @@ Public Class HuespedDatos
         End Using
         Return h
     End Function
+
+    ' Obtener todos los huéspedes registrados en el sistema
+    Public Function ListarTodos() As List(Of Huesped)
+        Dim lista As New List(Of Huesped)()
+        Dim query As String = "SELECT * FROM HUESPED"
+
+        Using con As SqlConnection = conexionBD.ObtenerConexion()
+            Using cmd As New SqlCommand(query, con)
+                con.Open()
+                Using dr As SqlDataReader = cmd.ExecuteReader()
+                    While dr.Read()
+                        Dim h As New Huesped() With {
+                            .id_huesped = Convert.ToInt32(dr("id_huesped")),
+                            .nombre = dr("nombre").ToString(),
+                            .apellido = dr("apellido").ToString(),
+                            .dni_pasaporte = dr("dni_pasaporte").ToString(),
+                            .telefono = If(IsDBNull(dr("telefono")), "", dr("telefono").ToString()),
+                            .email = If(IsDBNull(dr("email")), "", dr("email").ToString()),
+                            .barrio = If(IsDBNull(dr("barrio")), "", dr("barrio").ToString()),
+                            .calle = If(IsDBNull(dr("calle")), "", dr("calle").ToString()),
+                            .numero = If(IsDBNull(dr("numero")), "", dr("numero").ToString())
+                        }
+                        lista.Add(h)
+                    End While
+                End Using
+            End Using
+        End Using
+        Return lista
+    End Function
 End Class
