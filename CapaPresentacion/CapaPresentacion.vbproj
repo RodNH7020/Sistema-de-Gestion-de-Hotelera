@@ -5,13 +5,29 @@
 	<TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
-    <StartupObject>CapaPresentacion.FormularioLogin</StartupObject>
+    <StartupObject>CapaPresentacion.Frmmenuprincipal</StartupObject>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
   </PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\CapaNegocio\CapaNegocio.vbproj" />
 		<ProjectReference Include="..\SistemaHotelero\CapaEntidades.vbproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="My Project\Resources.Designer.vb">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="My Project\Resources.resx">
+	    <CustomToolNamespace>My.Resources</CustomToolNamespace>
+	    <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
