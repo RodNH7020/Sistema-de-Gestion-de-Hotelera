@@ -1,25 +1,51 @@
 ﻿Imports System.Data
 Imports CapaDatos
-Imports CapaEntidades
-Imports SistemaHotelero
+
+Public Class EstadisticasReservas
+    Public Property TotalReservas As Integer
+    Public Property TotalConfirmadas As Integer
+    Public Property TotalCanceladas As Integer
+    Public Property SumaTarifas As Decimal
+    Public Property PromedioTarifa As Decimal
+End Class
 
 Public Class ReservaNegocio
-    Private objReservaDatos As New ReservaDatos()
+    Private ReadOnly datos As New ReservaDatos()
 
-    Public Function InsertarReserva(r As Reserva) As Boolean
-        If r.fecha_ingreso >= r.fecha_salida Then
-            Throw New ArgumentException("La fecha de salida debe ser posterior a la fecha de ingreso.")
+    ' Sobrecarga 1: Recibe la entidad como Object para evitar conflictos de tipos
+    Public Overloads Function InsertarReserva(reserva As Object) As Boolean
+        If reserva Is Nothing Then
+            Throw New ArgumentNullException("Los datos de la reserva no pueden ser nulos.")
         End If
+        Return datos.InsertarReserva(reserva)
+    End Function
 
-        If r.fecha_ingreso.Date < DateTime.Now.Date Then
-            Throw New ArgumentException("La fecha de ingreso no puede ser anterior a la fecha actual.")
+    ' Sobrecarga 2: Recibe parámetros sueltos
+    Public Overloads Function InsertarReserva(idHuesped As Integer, idHabitacion As Integer, fechaReserva As Date, Optional estado As String = "Confirmada") As Boolean
+        If idHuesped <= 0 OrElse idHabitacion <= 0 Then
+            Throw New ArgumentException("Debe seleccionar un huésped y una habitación válidos.")
         End If
+        Return datos.InsertarReserva(idHuesped, idHabitacion, fechaReserva, estado)
+    End Function
 
-        If String.IsNullOrEmpty(r.estado) Then
-            r.estado = "Activa"
+    ' Cancelar reserva
+    Public Function CancelarReserva(idReserva As Integer) As Boolean
+        If idReserva <= 0 Then
+            Throw New ArgumentException("Debe indicar un número de reserva válido.")
         End If
+        Return datos.CancelarReserva(idReserva)
+    End Function
 
-        Return objReservaDatos.Insertar(r)
+    Public Function ObtenerHabitaciones() As DataTable
+        Return datos.ListarHabitacionesFiltro()
+    End Function
+
+    ' Lista de usuarios para el filtro de la pantalla
+    Public Function ObtenerUsuarios() As DataTable
+        Dim dt As New DataTable()
+        dt.Columns.Add("id_usuario", GetType(Integer))
+        dt.Columns.Add("descripcion", GetType(String))
+        Return dt
     End Function
 
     Public Function ListarReservasActivas(filtro As String) As DataTable

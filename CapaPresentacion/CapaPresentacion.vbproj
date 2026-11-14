@@ -9,9 +9,9 @@
     <MyType>WindowsFormsWithCustomSubMain</MyType>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CapaNegocio\CapaNegocio.vbproj" />
-    <ProjectReference Include="..\SistemaHotelero\CapaEntidades.vbproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CapaNegocio\CapaNegocio.vbproj" />
+		<ProjectReference Include="..\SistemaHotelero\CapaEntidades.vbproj" />
+	</ItemGroup>
 
 </Project>
