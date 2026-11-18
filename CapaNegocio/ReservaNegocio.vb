@@ -16,20 +16,12 @@ End Class
 Public Class ReservaNegocio
     Private ReadOnly datos As New ReservaDatos()
 
-    ' Sobrecarga 1: Recibe la entidad como Object para evitar conflictos de tipos
-    Public Overloads Function InsertarReserva(reserva As Object) As Boolean
-        If reserva Is Nothing Then
-            Throw New ArgumentNullException("Los datos de la reserva no pueden ser nulos.")
-        End If
-        Return datos.InsertarReserva(reserva)
-    End Function
-
 
     Public Function ListarReservasActivas(filtro As String) As DataTable
         Dim reservaDatos As New ReservaDatos()
         Return reservaDatos.ListarActivasConFiltro(filtro)
     End Function
-
+    ' Sobrecarga 1: Recibe la entidad como Object para evitar conflictos de tipos
     Public Overloads Function InsertarReserva(idHuesped As Integer, idHabitacion As Integer, fechaReserva As Date, Optional estado As String = "Confirmada") As Boolean
         If idHuesped <= 0 OrElse idHabitacion <= 0 Then
             Throw New ArgumentException("Debe seleccionar un huésped y una habitación válidos.")
