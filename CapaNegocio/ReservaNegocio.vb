@@ -1,5 +1,8 @@
 ﻿Imports System.Data
 Imports CapaDatos
+Imports CapaEntidades
+Imports SistemaHotelero
+
 
 Public Class EstadisticasReservas
     Public Property TotalReservas As Integer
@@ -8,6 +11,7 @@ Public Class EstadisticasReservas
     Public Property SumaTarifas As Decimal
     Public Property PromedioTarifa As Decimal
 End Class
+
 
 Public Class ReservaNegocio
     Private ReadOnly datos As New ReservaDatos()
@@ -20,6 +24,16 @@ Public Class ReservaNegocio
         Return datos.InsertarReserva(reserva)
     End Function
 
+
+    Public Function ListarReservasActivas(filtro As String) As DataTable
+        Dim reservaDatos As New ReservaDatos()
+        Return reservaDatos.ListarActivasConFiltro(filtro)
+    End Function
+
+    Public Function CancelarReserva(idReserva As Integer) As Boolean
+        ' Lógica para actualizar el estado de la reserva a "Cancelada" o "Anulada"
+        Dim reservaDatos As New ReservaDatos()
+        Return reservaDatos.ActualizarEstado(idReserva, "Cancelada")
     ' Sobrecarga 2: Recibe parámetros sueltos
     Public Overloads Function InsertarReserva(idHuesped As Integer, idHabitacion As Integer, fechaReserva As Date, Optional estado As String = "Confirmada") As Boolean
         If idHuesped <= 0 OrElse idHabitacion <= 0 Then
@@ -48,14 +62,35 @@ Public Class ReservaNegocio
         Return dt
     End Function
 
-    Public Function ListarReservasActivas(filtro As String) As DataTable
-        Dim reservaDatos As New ReservaDatos()
-        Return reservaDatos.ListarActivasConFiltro(filtro)
-    End Function
+    Public Function ConsultarReservas(fechaDesde As Date, fechaHasta As Date, idHabitacion As Integer, ByRef stats As EstadisticasReservas) As DataTable
+        If fechaHasta < fechaDesde Then
+            Throw New ArgumentException("La 'Fecha Hasta' no puede ser anterior a la 'Fecha Desde'.")
+        End If
 
-    Public Function CancelarReserva(idReserva As Integer) As Boolean
-        ' Lógica para actualizar el estado de la reserva a "Cancelada" o "Anulada"
-        Dim reservaDatos As New ReservaDatos()
-        Return reservaDatos.ActualizarEstado(idReserva, "Cancelada")
+        Dim dt As DataTable = datos.FiltrarReservas(fechaDesde, fechaHasta, idHabitacion)
+
+        stats = New EstadisticasReservas()
+        stats.TotalReservas = dt.Rows.Count
+        Dim sumaTarifas As Decimal = 0D
+
+        For Each row As DataRow In dt.Rows
+            Dim estado As String = row("Estado").ToString().Trim().ToLower()
+            ' Cuenta Confirmada, Activa y Finalizada como reservas efectivas
+            If estado = "confirmada" Or estado = "activa" Or estado = "finalizada" Then
+                stats.TotalConfirmadas += 1
+            ElseIf estado = "cancelada" Or estado = "anulada" Then
+                stats.TotalCanceladas += 1
+            End If
+
+            If Not IsDBNull(row("Tarifa Diaria")) Then
+                sumaTarifas += Convert.ToDecimal(row("Tarifa Diaria"))
+            End If
+        Next
+
+        stats.SumaTarifas = sumaTarifas
+        stats.PromedioTarifa = If(stats.TotalReservas > 0, Math.Round(sumaTarifas / stats.TotalReservas, 2), 0D)
+
+        Return dt
+
     End Function
 End Class
