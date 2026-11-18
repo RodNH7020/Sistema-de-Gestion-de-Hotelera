@@ -16,17 +16,17 @@ End Class
 Public Class ReservaNegocio
     Private ReadOnly datos As New ReservaDatos()
 
-
-    Public Function ListarReservasActivas(filtro As String) As DataTable
-        Dim reservaDatos As New ReservaDatos()
-        Return reservaDatos.ListarActivasConFiltro(filtro)
-    End Function
     ' Sobrecarga 1: Recibe la entidad como Object para evitar conflictos de tipos
-    Public Overloads Function InsertarReserva(idHuesped As Integer, idHabitacion As Integer, fechaReserva As Date, Optional estado As String = "Confirmada") As Boolean
-        If idHuesped <= 0 OrElse idHabitacion <= 0 Then
-            Throw New ArgumentException("Debe seleccionar un huésped y una habitación válidos.")
+    Public Function InsertarReserva(r As Reserva) As Boolean
+        Dim reservaDatos As New ReservaDatos()
+
+        ' Aquí puedes agregar validaciones de negocio si las necesitas 
+        ' (por ejemplo, validar que fecha_salida sea mayor a fecha_ingreso)
+        If r.fecha_salida < r.fecha_ingreso Then
+            Throw New Exception("La fecha de salida no puede ser anterior a la de ingreso.")
         End If
-        Return datos.InsertarReserva(idHuesped, idHabitacion, fechaReserva, estado)
+
+        Return reservaDatos.Insertar(r)
     End Function
 
     ' Cancelar / Anular reserva (una única definición unificada)

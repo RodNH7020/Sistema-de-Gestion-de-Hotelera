@@ -5,7 +5,7 @@
 	<TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
-    <StartupObject>CapaPresentacion.Frmmenuprincipal</StartupObject>
+    <StartupObject>CapaPresentacion.FormularioLogin</StartupObject>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
   </PropertyGroup>
 
