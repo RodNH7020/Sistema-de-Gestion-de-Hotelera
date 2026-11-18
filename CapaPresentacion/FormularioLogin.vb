@@ -33,6 +33,8 @@ Public Class FormularioLogin
 
                 ' 1. Instanciamos y mostramos el Menú Principal
                 Dim menuPrincipal As New FrmMenuPrincipal()
+                menuPrincipal.UsuarioActual = userLogueado.nombreUsuario
+                menuPrincipal.RolActual = userLogueado.rol
                 menuPrincipal.Show()
 
                 ' 2. Ocultamos el formulario de login actual

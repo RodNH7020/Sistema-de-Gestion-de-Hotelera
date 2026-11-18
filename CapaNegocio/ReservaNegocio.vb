@@ -29,14 +29,20 @@ Public Class ReservaNegocio
         Return datos.InsertarReserva(idHuesped, idHabitacion, fechaReserva, estado)
     End Function
 
-    ' Cancelar reserva
+    ' Cancelar / Anular reserva (una única definición unificada)
     Public Function CancelarReserva(idReserva As Integer) As Boolean
         If idReserva <= 0 Then
             Throw New ArgumentException("Debe indicar un número de reserva válido.")
         End If
-        Return datos.CancelarReserva(idReserva)
+        Return datos.ActualizarEstado(idReserva, "Cancelada")
     End Function
 
+    ' Listar reservas activas con filtro (para FrmAnularReserva)
+    Public Function ListarReservasActivas(Optional filtro As String = "") As DataTable
+        Return datos.ListarActivasConFiltro(filtro)
+    End Function
+
+    ' Obtener habitaciones para el combo de filtro (para FrmGestionReservas)
     Public Function ObtenerHabitaciones() As DataTable
         Return datos.ListarHabitacionesFiltro()
     End Function
