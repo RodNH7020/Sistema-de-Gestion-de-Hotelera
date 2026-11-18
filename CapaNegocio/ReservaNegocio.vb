@@ -30,11 +30,6 @@ Public Class ReservaNegocio
         Return reservaDatos.ListarActivasConFiltro(filtro)
     End Function
 
-    Public Function CancelarReserva(idReserva As Integer) As Boolean
-        ' Lógica para actualizar el estado de la reserva a "Cancelada" o "Anulada"
-        Dim reservaDatos As New ReservaDatos()
-        Return reservaDatos.ActualizarEstado(idReserva, "Cancelada")
-    ' Sobrecarga 2: Recibe parámetros sueltos
     Public Overloads Function InsertarReserva(idHuesped As Integer, idHabitacion As Integer, fechaReserva As Date, Optional estado As String = "Confirmada") As Boolean
         If idHuesped <= 0 OrElse idHabitacion <= 0 Then
             Throw New ArgumentException("Debe seleccionar un huésped y una habitación válidos.")
