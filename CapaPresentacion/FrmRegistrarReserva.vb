@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Drawing
+Imports System.Windows.Forms
 Imports CapaEntidades
 Imports CapaNegocio
 Imports SistemaHotelero
@@ -6,6 +7,12 @@ Imports SistemaHotelero
 Public Class FrmRegistrarReserva
 
     Private Sub FrmRegistrarReserva_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.ClientSize = New Size(920, 560)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.Text = "Registrar Reserva - Hotel Tekoha"
+
         ' Configuramos los calendarios (DateTimePicker)
         ' Evitamos que seleccionen fechas de ingreso anteriores al día de hoy
         dtpFechaIngreso.MinDate = DateTime.Today
@@ -14,7 +21,6 @@ Public Class FrmRegistrarReserva
         ' Cargar datos en los ComboBox (Huéspedes y Habitaciones)
         CargarCombos()
     End Sub
-
     Private Sub dtpFechaIngreso_ValueChanged(sender As Object, e As EventArgs) Handles dtpFechaIngreso.ValueChanged
         ' Regla de calendario inteligente: 
         ' La fecha mínima de salida siempre debe ser al menos el día posterior al ingreso seleccionado

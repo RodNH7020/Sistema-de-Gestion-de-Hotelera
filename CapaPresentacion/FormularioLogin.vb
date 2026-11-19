@@ -1,11 +1,35 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Drawing
+Imports System.Windows.Forms
 Imports CapaNegocio
 Imports SistemaHotelero
 
 Public Class FormularioLogin
+    Private claveVisible As Boolean = False
+
+    Private Sub FormularioLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.ClientSize = New Size(920, 560)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.Text = "LOGIN - Hotel Tekoha"
+        Me.AcceptButton = BIniciarSesion
+        TUsuario.Focus()
+    End Sub
+
+    ' Botón ojito para mostrar / ocultar contraseña
+    Private Sub btnVerClave_Click(sender As Object, e As EventArgs) Handles btnVerClave.Click
+        claveVisible = Not claveVisible
+        If claveVisible Then
+            TContraseña.UseSystemPasswordChar = False
+            btnVerClave.BackColor = Color.Gainsboro
+        Else
+            TContraseña.UseSystemPasswordChar = True
+            btnVerClave.BackColor = Color.WhiteSmoke
+        End If
+        TContraseña.Focus()
+    End Sub
 
     Private Sub BIniciarSesion_Click(sender As Object, e As EventArgs) Handles BIniciarSesion.Click
-        ' 1. Validación de campos vacíos en la capa de presentación (UI)
         If String.IsNullOrWhiteSpace(TUsuario.Text) Then
             MessageBox.Show("Por favor, ingrese su nombre de usuario.", "Campo Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             TUsuario.Focus()
@@ -18,26 +42,19 @@ Public Class FormularioLogin
             Exit Sub
         End If
 
-        ' 2. Proceso de autenticación
         Try
-            ' Instanciamos la capa de negocio de usuarios
             Dim usuarioNeg As New UsuarioNegocio()
-
-            ' Validamos contra la base de datos usando el método que armamos en la capa de negocio
             Dim userLogueado As Usuario = usuarioNeg.ValidarLogin(TUsuario.Text.Trim(), TContraseña.Text.Trim())
 
-            ' Si el login es exitoso:
             If userLogueado IsNot Nothing Then
                 MessageBox.Show("¡Bienvenido al sistema, " & userLogueado.nombreUsuario & "!",
-                    "Acceso Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                "Acceso Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                ' 1. Instanciamos y mostramos el Menú Principal
                 Dim menuPrincipal As New FrmMenuPrincipal()
                 menuPrincipal.UsuarioActual = userLogueado.nombreUsuario
                 menuPrincipal.RolActual = userLogueado.rol
                 menuPrincipal.Show()
 
-                ' 2. Ocultamos el formulario de login actual
                 Me.Hide()
             End If
         Catch ex As Exception
@@ -47,11 +64,15 @@ Public Class FormularioLogin
         End Try
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub lblSubtituloMarca_Click(sender As Object, e As EventArgs) Handles lblSubtituloMarca.Click
 
     End Sub
 
-    Private Sub LLogin_Click(sender As Object, e As EventArgs) Handles LLogin.Click
+    Private Sub lblSubtituloLogin_Click(sender As Object, e As EventArgs) Handles lblSubtituloLogin.Click
+
+    End Sub
+
+    Private Sub picLogo_Click(sender As Object, e As EventArgs) Handles picLogo.Click
 
     End Sub
 End Class

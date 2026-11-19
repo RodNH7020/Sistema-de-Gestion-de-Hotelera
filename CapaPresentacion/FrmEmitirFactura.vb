@@ -19,10 +19,15 @@ Public Class FrmEmitirFactura
     Private idEstadiaActual As Integer = 0
 
     Private Sub FrmEmitirFactura_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.ClientSize = New Size(920, 560)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.Text = "Emisión de Factura - Hotel Tekoha"
+
         cboTipoFactura.Items.Clear()
         cboTipoFactura.Items.Add("Factura B (Consumidor Final)")
         cboTipoFactura.Items.Add("Factura A (Responsable Inscripto)")
-
         pnlMensajeExito.Visible = False
         pnlMensajeError.Visible = False
         btnImprimirPdf.Enabled = False

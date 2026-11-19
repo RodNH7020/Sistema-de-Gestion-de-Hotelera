@@ -1,6 +1,7 @@
 ﻿Imports System.Data
 Imports System.Drawing
 Imports System.Drawing.Printing
+Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
 Imports CapaNegocio
 
@@ -9,13 +10,43 @@ Public Class FrmGestionReservas
     Private dtUltimaConsulta As DataTable
     Private statsActuales As EstadisticasReservas
 
+    ' Quita el círculo rojo de "Hoy" en los calendarios desplegables
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) As IntPtr
+    End Function
+
+    <DllImport("user32.dll", SetLastError:=True)>
+    Private Shared Function GetWindowLong(hWnd As IntPtr, nIndex As Integer) As Integer
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function SetWindowLong(hWnd As IntPtr, nIndex As Integer, dwNewLong As Integer) As Integer
+    End Function
+
+    Private Sub dtpCalendarios_DropDown(sender As Object, e As EventArgs) Handles dtpFechaDesde.DropDown, dtpFechaHasta.DropDown
+        Dim dtp As DateTimePicker = DirectCast(sender, DateTimePicker)
+        Dim hWndCal As IntPtr = SendMessage(dtp.Handle, &H1008, IntPtr.Zero, IntPtr.Zero) ' DTM_GETMONTHCAL
+        If hWndCal <> IntPtr.Zero Then
+            Const GWL_STYLE As Integer = -16
+            Const MCS_NOTODAYCIRCLE As Integer = &H8
+            Dim estilo As Integer = GetWindowLong(hWndCal, GWL_STYLE)
+            SetWindowLong(hWndCal, GWL_STYLE, estilo Or MCS_NOTODAYCIRCLE)
+        End If
+    End Sub
+
     Private Sub FrmGestionReservas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.ClientSize = New Size(920, 560)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.Text = "Gestión y Reporte de Reservas - Hotel Tekoha"
+
         dtpFechaDesde.Value = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
         dtpFechaHasta.Value = DateTime.Now
 
         ' Encabezado negro para la grilla
         dgvReservas.EnableHeadersVisualStyles = False
-        dgvReservas.ColumnHeadersDefaultCellStyle.BackColor = Color.Black
+        dgvReservas.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(24, 24, 24)
         dgvReservas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         dgvReservas.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9.0!, FontStyle.Bold)
         dgvReservas.DefaultCellStyle.Font = New Font("Segoe UI", 8.5!)
@@ -167,5 +198,9 @@ Public Class FrmGestionReservas
         e.Graphics.DrawString("Total Reservas: " & statsActuales.TotalReservas & "  |  Confirmadas: " & statsActuales.TotalConfirmadas & "  |  Canceladas: " & statsActuales.TotalCanceladas, fuenteTotales, Brushes.Black, margenIzq, y)
         y += 20
         e.Graphics.DrawString("Suma Total de Tarifas: " & statsActuales.SumaTarifas.ToString("C2") & "  |  Tarifa Promedio: " & statsActuales.PromedioTarifa.ToString("C2"), fuenteTotales, Brushes.DarkBlue, margenIzq, y)
+    End Sub
+
+    Private Sub lblTitulo_Click(sender As Object, e As EventArgs) Handles lblTitulo.Click
+
     End Sub
 End Class

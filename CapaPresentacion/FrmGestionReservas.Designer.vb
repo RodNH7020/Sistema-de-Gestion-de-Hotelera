@@ -16,7 +16,9 @@ Partial Class FrmGestionReservas
     Private components As System.ComponentModel.IContainer
 
     Friend WithEvents pnlHeader As System.Windows.Forms.Panel
+    Friend WithEvents picIconoHeader As System.Windows.Forms.PictureBox
     Friend WithEvents lblTitulo As System.Windows.Forms.Label
+    Friend WithEvents lblSubtituloHeader As System.Windows.Forms.Label
     Friend WithEvents grpBusqueda As System.Windows.Forms.GroupBox
     Friend WithEvents lblDesde As System.Windows.Forms.Label
     Friend WithEvents dtpFechaDesde As System.Windows.Forms.DateTimePicker
@@ -44,267 +46,405 @@ Partial Class FrmGestionReservas
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.lblTitulo = New System.Windows.Forms.Label()
-        Me.grpBusqueda = New System.Windows.Forms.GroupBox()
-        Me.lblDesde = New System.Windows.Forms.Label()
-        Me.dtpFechaDesde = New System.Windows.Forms.DateTimePicker()
-        Me.lblHasta = New System.Windows.Forms.Label()
-        Me.dtpFechaHasta = New System.Windows.Forms.DateTimePicker()
-        Me.lblHabitacion = New System.Windows.Forms.Label()
-        Me.cboHabitacion = New System.Windows.Forms.ComboBox()
-        Me.lblUsuario = New System.Windows.Forms.Label()
-        Me.cboUsuario = New System.Windows.Forms.ComboBox()
-        Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.btnImprimir = New System.Windows.Forms.Button()
-        Me.dgvReservas = New System.Windows.Forms.DataGridView()
-        Me.grpEstadisticas = New System.Windows.Forms.GroupBox()
-        Me.lblTotalReservas = New System.Windows.Forms.Label()
-        Me.lblConfirmadas = New System.Windows.Forms.Label()
-        Me.lblCanceladas = New System.Windows.Forms.Label()
-        Me.lblSumaTarifas = New System.Windows.Forms.Label()
-        Me.lblPromedioTarifa = New System.Windows.Forms.Label()
-        Me.pnlMensajeExito = New System.Windows.Forms.Panel()
-        Me.lblMensajeExito = New System.Windows.Forms.Label()
-        Me.pnlMensajeError = New System.Windows.Forms.Panel()
-        Me.lblMensajeError = New System.Windows.Forms.Label()
-        Me.prtDoc = New System.Drawing.Printing.PrintDocument()
-        Me.prtDialog = New System.Windows.Forms.PrintPreviewDialog()
-
-        Me.pnlHeader.SuspendLayout()
-        Me.grpBusqueda.SuspendLayout()
-        CType(Me.dgvReservas, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpEstadisticas.SuspendLayout()
-        Me.pnlMensajeExito.SuspendLayout()
-        Me.pnlMensajeError.SuspendLayout()
-        Me.SuspendLayout()
-
-        ' Header Negro institucional
-        Me.pnlHeader.BackColor = System.Drawing.Color.Black
-        Me.pnlHeader.Controls.Add(Me.lblTitulo)
-        Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
-        Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(990, 50)
-        Me.pnlHeader.TabIndex = 0
-
-        Me.lblTitulo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblTitulo.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lblTitulo.ForeColor = System.Drawing.Color.White
-        Me.lblTitulo.Location = New System.Drawing.Point(0, 0)
-        Me.lblTitulo.Name = "lblTitulo"
-        Me.lblTitulo.Size = New System.Drawing.Size(990, 50)
-        Me.lblTitulo.Text = "Gestión y Consulta de Reservas"
-        Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-
-        ' Filtros de Búsqueda
-        Me.grpBusqueda.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular)
-        Me.grpBusqueda.Location = New System.Drawing.Point(20, 60)
-        Me.grpBusqueda.Name = "grpBusqueda"
-        Me.grpBusqueda.Size = New System.Drawing.Size(950, 85)
-        Me.grpBusqueda.TabIndex = 1
-        Me.grpBusqueda.TabStop = False
-        Me.grpBusqueda.Text = "Filtros de Búsqueda"
-
-        Me.lblDesde.AutoSize = True
-        Me.lblDesde.Location = New System.Drawing.Point(15, 23)
-        Me.lblDesde.Name = "lblDesde"
-        Me.lblDesde.Size = New System.Drawing.Size(76, 15)
-        Me.lblDesde.Text = "Fecha Desde:"
-
-        Me.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short
-        Me.dtpFechaDesde.Location = New System.Drawing.Point(18, 44)
-        Me.dtpFechaDesde.Name = "dtpFechaDesde"
-        Me.dtpFechaDesde.Size = New System.Drawing.Size(100, 23)
-        Me.dtpFechaDesde.TabIndex = 0
-
-        Me.lblHasta.AutoSize = True
-        Me.lblHasta.Location = New System.Drawing.Point(128, 23)
-        Me.lblHasta.Name = "lblHasta"
-        Me.lblHasta.Size = New System.Drawing.Size(74, 15)
-        Me.lblHasta.Text = "Fecha Hasta:"
-
-        Me.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short
-        Me.dtpFechaHasta.Location = New System.Drawing.Point(131, 44)
-        Me.dtpFechaHasta.Name = "dtpFechaHasta"
-        Me.dtpFechaHasta.Size = New System.Drawing.Size(100, 23)
-        Me.dtpFechaHasta.TabIndex = 1
-
-        Me.lblHabitacion.AutoSize = True
-        Me.lblHabitacion.Location = New System.Drawing.Point(240, 23)
-        Me.lblHabitacion.Name = "lblHabitacion"
-        Me.lblHabitacion.Size = New System.Drawing.Size(68, 15)
-        Me.lblHabitacion.Text = "Habitación:"
-
-        Me.cboHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboHabitacion.Location = New System.Drawing.Point(243, 44)
-        Me.cboHabitacion.Name = "cboHabitacion"
-        Me.cboHabitacion.Size = New System.Drawing.Size(175, 23)
-        Me.cboHabitacion.TabIndex = 2
-
-        Me.lblUsuario.AutoSize = True
-        Me.lblUsuario.Location = New System.Drawing.Point(428, 23)
-        Me.lblUsuario.Name = "lblUsuario"
-        Me.lblUsuario.Size = New System.Drawing.Size(123, 15)
-        Me.lblUsuario.Text = "Personal / Recepción:"
-
-        Me.cboUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboUsuario.Location = New System.Drawing.Point(431, 44)
-        Me.cboUsuario.Name = "cboUsuario"
-        Me.cboUsuario.Size = New System.Drawing.Size(175, 23)
-        Me.cboUsuario.TabIndex = 3
-
-        ' Botón Buscar Rojo Carmesí
-        Me.btnBuscar.BackColor = System.Drawing.Color.FromArgb(204, 0, 51)
-        Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBuscar.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnBuscar.ForeColor = System.Drawing.Color.White
-        Me.btnBuscar.Location = New System.Drawing.Point(630, 41)
-        Me.btnBuscar.Name = "btnBuscar"
-        Me.btnBuscar.Size = New System.Drawing.Size(130, 28)
-        Me.btnBuscar.TabIndex = 4
-        Me.btnBuscar.Text = "Buscar / Filtrar"
-        Me.btnBuscar.UseVisualStyleBackColor = False
-
-        ' Botón Imprimir Grafito Oscuro
-        Me.btnImprimir.BackColor = System.Drawing.Color.FromArgb(40, 40, 40)
-        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImprimir.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnImprimir.ForeColor = System.Drawing.Color.White
-        Me.btnImprimir.Location = New System.Drawing.Point(775, 41)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(155, 28)
-        Me.btnImprimir.TabIndex = 5
-        Me.btnImprimir.Text = "🖶 Imprimir Reporte"
-        Me.btnImprimir.UseVisualStyleBackColor = False
-
-        Me.grpBusqueda.Controls.AddRange(New System.Windows.Forms.Control() {Me.lblDesde, Me.dtpFechaDesde, Me.lblHasta, Me.dtpFechaHasta, Me.lblHabitacion, Me.cboHabitacion, Me.lblUsuario, Me.cboUsuario, Me.btnBuscar, Me.btnImprimir})
-
-        ' Grilla de Resultados
-        Me.dgvReservas.AllowUserToAddRows = False
-        Me.dgvReservas.AllowUserToDeleteRows = False
-        Me.dgvReservas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvReservas.BackgroundColor = System.Drawing.Color.White
-        Me.dgvReservas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.dgvReservas.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.dgvReservas.Location = New System.Drawing.Point(20, 155)
-        Me.dgvReservas.Name = "dgvReservas"
-        Me.dgvReservas.ReadOnly = True
-        Me.dgvReservas.RowHeadersVisible = False
-        Me.dgvReservas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvReservas.Size = New System.Drawing.Size(950, 255)
-        Me.dgvReservas.TabIndex = 2
-
-        ' Recuadro Inferior de Estadísticas
-        Me.grpEstadisticas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular)
-        Me.grpEstadisticas.Location = New System.Drawing.Point(20, 420)
-        Me.grpEstadisticas.Name = "grpEstadisticas"
-        Me.grpEstadisticas.Size = New System.Drawing.Size(950, 68)
-        Me.grpEstadisticas.TabIndex = 3
-        Me.grpEstadisticas.TabStop = False
-        Me.grpEstadisticas.Text = "Resumen y Estadísticas del Período"
-
-        Me.lblTotalReservas.AutoSize = True
-        Me.lblTotalReservas.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblTotalReservas.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalReservas.Location = New System.Drawing.Point(20, 28)
-        Me.lblTotalReservas.Name = "lblTotalReservas"
-        Me.lblTotalReservas.Size = New System.Drawing.Size(89, 17)
-        Me.lblTotalReservas.Text = "Reservas: 0"
-
-        Me.lblConfirmadas.AutoSize = True
-        Me.lblConfirmadas.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblConfirmadas.ForeColor = System.Drawing.Color.FromArgb(21, 87, 36)
-        Me.lblConfirmadas.Location = New System.Drawing.Point(155, 28)
-        Me.lblConfirmadas.Name = "lblConfirmadas"
-        Me.lblConfirmadas.Size = New System.Drawing.Size(107, 17)
-        Me.lblConfirmadas.Text = "Confirmadas: 0"
-
-        Me.lblCanceladas.AutoSize = True
-        Me.lblCanceladas.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblCanceladas.ForeColor = System.Drawing.Color.FromArgb(204, 0, 51)
-        Me.lblCanceladas.Location = New System.Drawing.Point(310, 28)
-        Me.lblCanceladas.Name = "lblCanceladas"
-        Me.lblCanceladas.Size = New System.Drawing.Size(97, 17)
-        Me.lblCanceladas.Text = "Canceladas: 0"
-
-        Me.lblSumaTarifas.AutoSize = True
-        Me.lblSumaTarifas.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblSumaTarifas.ForeColor = System.Drawing.Color.Black
-        Me.lblSumaTarifas.Location = New System.Drawing.Point(460, 28)
-        Me.lblSumaTarifas.Name = "lblSumaTarifas"
-        Me.lblSumaTarifas.Size = New System.Drawing.Size(161, 17)
-        Me.lblSumaTarifas.Text = "Suma Total: $ 0,00"
-
-        Me.lblPromedioTarifa.AutoSize = True
-        Me.lblPromedioTarifa.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblPromedioTarifa.ForeColor = System.Drawing.Color.FromArgb(40, 40, 40)
-        Me.lblPromedioTarifa.Location = New System.Drawing.Point(710, 28)
-        Me.lblPromedioTarifa.Name = "lblPromedioTarifa"
-        Me.lblPromedioTarifa.Size = New System.Drawing.Size(185, 17)
-        Me.lblPromedioTarifa.Text = "Tarifa Promedio: $ 0,00"
-
-        Me.grpEstadisticas.Controls.AddRange(New System.Windows.Forms.Control() {Me.lblTotalReservas, Me.lblConfirmadas, Me.lblCanceladas, Me.lblSumaTarifas, Me.lblPromedioTarifa})
-
-        ' Banner Verde
-        Me.pnlMensajeExito.BackColor = System.Drawing.Color.FromArgb(212, 237, 218)
-        Me.pnlMensajeExito.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlMensajeExito.Controls.Add(Me.lblMensajeExito)
-        Me.pnlMensajeExito.Location = New System.Drawing.Point(20, 498)
-        Me.pnlMensajeExito.Name = "pnlMensajeExito"
-        Me.pnlMensajeExito.Size = New System.Drawing.Size(950, 30)
-        Me.pnlMensajeExito.TabIndex = 4
-        Me.pnlMensajeExito.Visible = False
-
-        Me.lblMensajeExito.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblMensajeExito.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lblMensajeExito.ForeColor = System.Drawing.Color.FromArgb(21, 87, 36)
-        Me.lblMensajeExito.Location = New System.Drawing.Point(0, 0)
-        Me.lblMensajeExito.Name = "lblMensajeExito"
-        Me.lblMensajeExito.Size = New System.Drawing.Size(948, 28)
-        Me.lblMensajeExito.Text = "✓ Reporte generado correctamente."
-        Me.lblMensajeExito.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-
-        ' Banner Rojo
-        Me.pnlMensajeError.BackColor = System.Drawing.Color.FromArgb(248, 215, 218)
-        Me.pnlMensajeError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlMensajeError.Controls.Add(Me.lblMensajeError)
-        Me.pnlMensajeError.Location = New System.Drawing.Point(20, 498)
-        Me.pnlMensajeError.Name = "pnlMensajeError"
-        Me.pnlMensajeError.Size = New System.Drawing.Size(950, 30)
-        Me.pnlMensajeError.TabIndex = 5
-        Me.pnlMensajeError.Visible = False
-
-        Me.lblMensajeError.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblMensajeError.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lblMensajeError.ForeColor = System.Drawing.Color.FromArgb(114, 28, 36)
-        Me.lblMensajeError.Location = New System.Drawing.Point(0, 0)
-        Me.lblMensajeError.Name = "lblMensajeError"
-        Me.lblMensajeError.Size = New System.Drawing.Size(948, 28)
-        Me.lblMensajeError.Text = "⚠ No existen reservas ni estadías para el período seleccionado."
-        Me.lblMensajeError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-
-        Me.prtDialog.Document = Me.prtDoc
-
-        ' Form
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(990, 545)
-        Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.MaximizeBox = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Gestión de Reservas - Hotel Tekoha"
-        Me.Controls.AddRange(New System.Windows.Forms.Control() {Me.pnlHeader, Me.grpBusqueda, Me.dgvReservas, Me.grpEstadisticas, Me.pnlMensajeExito, Me.pnlMensajeError})
-
-        Me.pnlHeader.ResumeLayout(False)
-        Me.grpBusqueda.ResumeLayout(False)
-        Me.grpBusqueda.PerformLayout()
-        CType(Me.dgvReservas, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpEstadisticas.ResumeLayout(False)
-        Me.grpEstadisticas.PerformLayout()
-        Me.pnlMensajeExito.ResumeLayout(False)
-        Me.pnlMensajeError.ResumeLayout(False)
-        Me.ResumeLayout(False)
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmGestionReservas))
+        pnlHeader = New System.Windows.Forms.Panel()
+        lblSubtituloHeader = New System.Windows.Forms.Label()
+        lblTitulo = New System.Windows.Forms.Label()
+        picIconoHeader = New System.Windows.Forms.PictureBox()
+        grpBusqueda = New System.Windows.Forms.GroupBox()
+        lblDesde = New System.Windows.Forms.Label()
+        dtpFechaDesde = New System.Windows.Forms.DateTimePicker()
+        lblHasta = New System.Windows.Forms.Label()
+        dtpFechaHasta = New System.Windows.Forms.DateTimePicker()
+        lblHabitacion = New System.Windows.Forms.Label()
+        cboHabitacion = New System.Windows.Forms.ComboBox()
+        lblUsuario = New System.Windows.Forms.Label()
+        cboUsuario = New System.Windows.Forms.ComboBox()
+        btnBuscar = New System.Windows.Forms.Button()
+        btnImprimir = New System.Windows.Forms.Button()
+        dgvReservas = New System.Windows.Forms.DataGridView()
+        grpEstadisticas = New System.Windows.Forms.GroupBox()
+        lblTotalReservas = New System.Windows.Forms.Label()
+        lblConfirmadas = New System.Windows.Forms.Label()
+        lblCanceladas = New System.Windows.Forms.Label()
+        lblSumaTarifas = New System.Windows.Forms.Label()
+        lblPromedioTarifa = New System.Windows.Forms.Label()
+        pnlMensajeExito = New System.Windows.Forms.Panel()
+        lblMensajeExito = New System.Windows.Forms.Label()
+        pnlMensajeError = New System.Windows.Forms.Panel()
+        lblMensajeError = New System.Windows.Forms.Label()
+        prtDoc = New Drawing.Printing.PrintDocument()
+        prtDialog = New System.Windows.Forms.PrintPreviewDialog()
+        pnlHeader.SuspendLayout()
+        CType(picIconoHeader, ComponentModel.ISupportInitialize).BeginInit()
+        grpBusqueda.SuspendLayout()
+        CType(dgvReservas, ComponentModel.ISupportInitialize).BeginInit()
+        grpEstadisticas.SuspendLayout()
+        pnlMensajeExito.SuspendLayout()
+        pnlMensajeError.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' pnlHeader
+        ' 
+        pnlHeader.BackColor = Drawing.Color.FromArgb(CByte(24), CByte(24), CByte(24))
+        pnlHeader.Controls.Add(lblSubtituloHeader)
+        pnlHeader.Controls.Add(lblTitulo)
+        pnlHeader.Controls.Add(picIconoHeader)
+        pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
+        pnlHeader.Location = New System.Drawing.Point(0, 0)
+        pnlHeader.Name = "pnlHeader"
+        pnlHeader.Size = New System.Drawing.Size(920, 56)
+        pnlHeader.TabIndex = 0
+        ' 
+        ' lblSubtituloHeader
+        ' 
+        lblSubtituloHeader.AutoSize = True
+        lblSubtituloHeader.Font = New System.Drawing.Font("Segoe UI", 8.5F)
+        lblSubtituloHeader.ForeColor = Drawing.Color.Silver
+        lblSubtituloHeader.Location = New System.Drawing.Point(74, 33)
+        lblSubtituloHeader.Name = "lblSubtituloHeader"
+        lblSubtituloHeader.Size = New System.Drawing.Size(295, 15)
+        lblSubtituloHeader.TabIndex = 2
+        lblSubtituloHeader.Text = "Hotel Tekoha • Control de ocupación, tarifas y reportes"
+        ' 
+        ' lblTitulo
+        ' 
+        lblTitulo.AutoSize = True
+        lblTitulo.Font = New System.Drawing.Font("Segoe UI", 14.5F, Drawing.FontStyle.Bold)
+        lblTitulo.ForeColor = Drawing.Color.White
+        lblTitulo.Location = New System.Drawing.Point(72, 7)
+        lblTitulo.Name = "lblTitulo"
+        lblTitulo.Size = New System.Drawing.Size(308, 28)
+        lblTitulo.TabIndex = 1
+        lblTitulo.Text = "Gestión y Consulta de Reservas"
+        ' 
+        ' picIconoHeader
+        ' 
+        picIconoHeader.BackColor = Drawing.Color.Transparent
+        picIconoHeader.Image = My.Resources.Resources.Gemini_Generated_Image_hn4yfghn4yfghn4y_removebg_preview
+        picIconoHeader.Location = New System.Drawing.Point(-16, -9)
+        picIconoHeader.Name = "picIconoHeader"
+        picIconoHeader.Size = New System.Drawing.Size(116, 78)
+        picIconoHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picIconoHeader.TabIndex = 0
+        picIconoHeader.TabStop = False
+        ' 
+        ' grpBusqueda
+        ' 
+        grpBusqueda.BackColor = Drawing.Color.White
+        grpBusqueda.Controls.Add(lblDesde)
+        grpBusqueda.Controls.Add(dtpFechaDesde)
+        grpBusqueda.Controls.Add(lblHasta)
+        grpBusqueda.Controls.Add(dtpFechaHasta)
+        grpBusqueda.Controls.Add(lblHabitacion)
+        grpBusqueda.Controls.Add(cboHabitacion)
+        grpBusqueda.Controls.Add(lblUsuario)
+        grpBusqueda.Controls.Add(cboUsuario)
+        grpBusqueda.Controls.Add(btnBuscar)
+        grpBusqueda.Controls.Add(btnImprimir)
+        grpBusqueda.Font = New System.Drawing.Font("Segoe UI", 9.0F, Drawing.FontStyle.Bold)
+        grpBusqueda.ForeColor = Drawing.Color.FromArgb(CByte(40), CByte(40), CByte(40))
+        grpBusqueda.Location = New System.Drawing.Point(20, 66)
+        grpBusqueda.Name = "grpBusqueda"
+        grpBusqueda.Size = New System.Drawing.Size(880, 82)
+        grpBusqueda.TabIndex = 1
+        grpBusqueda.TabStop = False
+        grpBusqueda.Text = "Filtros de Búsqueda"
+        ' 
+        ' lblDesde
+        ' 
+        lblDesde.AutoSize = True
+        lblDesde.Font = New System.Drawing.Font("Segoe UI", 8.5F, Drawing.FontStyle.Bold)
+        lblDesde.Location = New System.Drawing.Point(14, 22)
+        lblDesde.Name = "lblDesde"
+        lblDesde.Size = New System.Drawing.Size(80, 15)
+        lblDesde.TabIndex = 0
+        lblDesde.Text = "Fecha Desde:"
+        ' 
+        ' dtpFechaDesde
+        ' 
+        dtpFechaDesde.CalendarMonthBackground = Drawing.Color.White
+        dtpFechaDesde.CalendarTitleBackColor = Drawing.Color.FromArgb(CByte(24), CByte(24), CByte(24))
+        dtpFechaDesde.CalendarTitleForeColor = Drawing.Color.White
+        dtpFechaDesde.CalendarTrailingForeColor = Drawing.Color.Gray
+        dtpFechaDesde.Font = New System.Drawing.Font("Segoe UI", 9.0F)
+        dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short
+        dtpFechaDesde.Location = New System.Drawing.Point(14, 42)
+        dtpFechaDesde.Name = "dtpFechaDesde"
+        dtpFechaDesde.Size = New System.Drawing.Size(102, 23)
+        dtpFechaDesde.TabIndex = 0
+        ' 
+        ' lblHasta
+        ' 
+        lblHasta.AutoSize = True
+        lblHasta.Font = New System.Drawing.Font("Segoe UI", 8.5F, Drawing.FontStyle.Bold)
+        lblHasta.Location = New System.Drawing.Point(126, 22)
+        lblHasta.Name = "lblHasta"
+        lblHasta.Size = New System.Drawing.Size(76, 15)
+        lblHasta.TabIndex = 1
+        lblHasta.Text = "Fecha Hasta:"
+        ' 
+        ' dtpFechaHasta
+        ' 
+        dtpFechaHasta.CalendarMonthBackground = Drawing.Color.White
+        dtpFechaHasta.CalendarTitleBackColor = Drawing.Color.FromArgb(CByte(24), CByte(24), CByte(24))
+        dtpFechaHasta.CalendarTitleForeColor = Drawing.Color.White
+        dtpFechaHasta.CalendarTrailingForeColor = Drawing.Color.Gray
+        dtpFechaHasta.Font = New System.Drawing.Font("Segoe UI", 9.0F)
+        dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short
+        dtpFechaHasta.Location = New System.Drawing.Point(126, 42)
+        dtpFechaHasta.Name = "dtpFechaHasta"
+        dtpFechaHasta.Size = New System.Drawing.Size(102, 23)
+        dtpFechaHasta.TabIndex = 1
+        ' 
+        ' lblHabitacion
+        ' 
+        lblHabitacion.AutoSize = True
+        lblHabitacion.Font = New System.Drawing.Font("Segoe UI", 8.5F, Drawing.FontStyle.Bold)
+        lblHabitacion.Location = New System.Drawing.Point(238, 22)
+        lblHabitacion.Name = "lblHabitacion"
+        lblHabitacion.Size = New System.Drawing.Size(69, 15)
+        lblHabitacion.TabIndex = 2
+        lblHabitacion.Text = "Habitación:"
+        ' 
+        ' cboHabitacion
+        ' 
+        cboHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        cboHabitacion.Font = New System.Drawing.Font("Segoe UI", 9.0F)
+        cboHabitacion.Location = New System.Drawing.Point(238, 42)
+        cboHabitacion.Name = "cboHabitacion"
+        cboHabitacion.Size = New System.Drawing.Size(170, 23)
+        cboHabitacion.TabIndex = 2
+        ' 
+        ' lblUsuario
+        ' 
+        lblUsuario.AutoSize = True
+        lblUsuario.Font = New System.Drawing.Font("Segoe UI", 8.5F, Drawing.FontStyle.Bold)
+        lblUsuario.Location = New System.Drawing.Point(418, 22)
+        lblUsuario.Name = "lblUsuario"
+        lblUsuario.Size = New System.Drawing.Size(126, 15)
+        lblUsuario.TabIndex = 3
+        lblUsuario.Text = "Personal / Recepción:"
+        ' 
+        ' cboUsuario
+        ' 
+        cboUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        cboUsuario.Font = New System.Drawing.Font("Segoe UI", 9.0F)
+        cboUsuario.Location = New System.Drawing.Point(418, 42)
+        cboUsuario.Name = "cboUsuario"
+        cboUsuario.Size = New System.Drawing.Size(165, 23)
+        cboUsuario.TabIndex = 3
+        ' 
+        ' btnBuscar
+        ' 
+        btnBuscar.BackColor = Drawing.Color.Crimson
+        btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand
+        btnBuscar.FlatAppearance.BorderSize = 0
+        btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnBuscar.Font = New System.Drawing.Font("Segoe UI", 9.0F, Drawing.FontStyle.Bold)
+        btnBuscar.ForeColor = Drawing.Color.White
+        btnBuscar.Location = New System.Drawing.Point(596, 39)
+        btnBuscar.Name = "btnBuscar"
+        btnBuscar.Size = New System.Drawing.Size(125, 29)
+        btnBuscar.TabIndex = 4
+        btnBuscar.Text = "Buscar / Filtrar"
+        btnBuscar.UseVisualStyleBackColor = False
+        ' 
+        ' btnImprimir
+        ' 
+        btnImprimir.BackColor = Drawing.Color.FromArgb(CByte(35), CByte(35), CByte(35))
+        btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        btnImprimir.FlatAppearance.BorderSize = 0
+        btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnImprimir.Font = New System.Drawing.Font("Segoe UI", 9.0F, Drawing.FontStyle.Bold)
+        btnImprimir.ForeColor = Drawing.Color.White
+        btnImprimir.Location = New System.Drawing.Point(730, 39)
+        btnImprimir.Name = "btnImprimir"
+        btnImprimir.Size = New System.Drawing.Size(136, 29)
+        btnImprimir.TabIndex = 5
+        btnImprimir.Text = "Imprimir Reporte"
+        btnImprimir.UseVisualStyleBackColor = False
+        ' 
+        ' dgvReservas
+        ' 
+        dgvReservas.AllowUserToAddRows = False
+        dgvReservas.AllowUserToDeleteRows = False
+        DataGridViewCellStyle1.BackColor = Drawing.Color.FromArgb(CByte(248), CByte(249), CByte(250))
+        dgvReservas.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        dgvReservas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        dgvReservas.BackgroundColor = Drawing.Color.White
+        dgvReservas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        dgvReservas.Font = New System.Drawing.Font("Segoe UI", 9.0F)
+        dgvReservas.GridColor = Drawing.Color.FromArgb(CByte(230), CByte(230), CByte(230))
+        dgvReservas.Location = New System.Drawing.Point(20, 158)
+        dgvReservas.Name = "dgvReservas"
+        dgvReservas.ReadOnly = True
+        dgvReservas.RowHeadersVisible = False
+        dgvReservas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        dgvReservas.Size = New System.Drawing.Size(880, 265)
+        dgvReservas.TabIndex = 2
+        ' 
+        ' grpEstadisticas
+        ' 
+        grpEstadisticas.BackColor = Drawing.Color.White
+        grpEstadisticas.Controls.Add(lblTotalReservas)
+        grpEstadisticas.Controls.Add(lblConfirmadas)
+        grpEstadisticas.Controls.Add(lblCanceladas)
+        grpEstadisticas.Controls.Add(lblSumaTarifas)
+        grpEstadisticas.Controls.Add(lblPromedioTarifa)
+        grpEstadisticas.Font = New System.Drawing.Font("Segoe UI", 9.0F, Drawing.FontStyle.Bold)
+        grpEstadisticas.ForeColor = Drawing.Color.FromArgb(CByte(40), CByte(40), CByte(40))
+        grpEstadisticas.Location = New System.Drawing.Point(20, 432)
+        grpEstadisticas.Name = "grpEstadisticas"
+        grpEstadisticas.Size = New System.Drawing.Size(880, 64)
+        grpEstadisticas.TabIndex = 3
+        grpEstadisticas.TabStop = False
+        grpEstadisticas.Text = "Resumen y Estadísticas del Período"
+        ' 
+        ' lblTotalReservas
+        ' 
+        lblTotalReservas.AutoSize = True
+        lblTotalReservas.Font = New System.Drawing.Font("Segoe UI", 9.5F, Drawing.FontStyle.Bold)
+        lblTotalReservas.ForeColor = Drawing.Color.FromArgb(CByte(24), CByte(24), CByte(24))
+        lblTotalReservas.Location = New System.Drawing.Point(18, 27)
+        lblTotalReservas.Name = "lblTotalReservas"
+        lblTotalReservas.Size = New System.Drawing.Size(77, 17)
+        lblTotalReservas.TabIndex = 0
+        lblTotalReservas.Text = "Reservas: 0"
+        ' 
+        ' lblConfirmadas
+        ' 
+        lblConfirmadas.AutoSize = True
+        lblConfirmadas.Font = New System.Drawing.Font("Segoe UI", 9.5F, Drawing.FontStyle.Bold)
+        lblConfirmadas.ForeColor = Drawing.Color.FromArgb(CByte(21), CByte(115), CByte(71))
+        lblConfirmadas.Location = New System.Drawing.Point(145, 27)
+        lblConfirmadas.Name = "lblConfirmadas"
+        lblConfirmadas.Size = New System.Drawing.Size(101, 17)
+        lblConfirmadas.TabIndex = 1
+        lblConfirmadas.Text = "Confirmadas: 0"
+        ' 
+        ' lblCanceladas
+        ' 
+        lblCanceladas.AutoSize = True
+        lblCanceladas.Font = New System.Drawing.Font("Segoe UI", 9.5F, Drawing.FontStyle.Bold)
+        lblCanceladas.ForeColor = Drawing.Color.Crimson
+        lblCanceladas.Location = New System.Drawing.Point(295, 27)
+        lblCanceladas.Name = "lblCanceladas"
+        lblCanceladas.Size = New System.Drawing.Size(91, 17)
+        lblCanceladas.TabIndex = 2
+        lblCanceladas.Text = "Canceladas: 0"
+        ' 
+        ' lblSumaTarifas
+        ' 
+        lblSumaTarifas.AutoSize = True
+        lblSumaTarifas.Font = New System.Drawing.Font("Segoe UI", 9.5F, Drawing.FontStyle.Bold)
+        lblSumaTarifas.ForeColor = Drawing.Color.FromArgb(CByte(24), CByte(24), CByte(24))
+        lblSumaTarifas.Location = New System.Drawing.Point(435, 27)
+        lblSumaTarifas.Name = "lblSumaTarifas"
+        lblSumaTarifas.Size = New System.Drawing.Size(121, 17)
+        lblSumaTarifas.TabIndex = 3
+        lblSumaTarifas.Text = "Suma Total: $ 0,00"
+        ' 
+        ' lblPromedioTarifa
+        ' 
+        lblPromedioTarifa.AutoSize = True
+        lblPromedioTarifa.Font = New System.Drawing.Font("Segoe UI", 9.5F, Drawing.FontStyle.Bold)
+        lblPromedioTarifa.ForeColor = Drawing.Color.FromArgb(CByte(60), CByte(60), CByte(60))
+        lblPromedioTarifa.Location = New System.Drawing.Point(665, 27)
+        lblPromedioTarifa.Name = "lblPromedioTarifa"
+        lblPromedioTarifa.Size = New System.Drawing.Size(151, 17)
+        lblPromedioTarifa.TabIndex = 4
+        lblPromedioTarifa.Text = "Tarifa Promedio: $ 0,00"
+        ' 
+        ' pnlMensajeExito
+        ' 
+        pnlMensajeExito.BackColor = Drawing.Color.FromArgb(CByte(212), CByte(237), CByte(218))
+        pnlMensajeExito.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        pnlMensajeExito.Controls.Add(lblMensajeExito)
+        pnlMensajeExito.Location = New System.Drawing.Point(20, 506)
+        pnlMensajeExito.Name = "pnlMensajeExito"
+        pnlMensajeExito.Size = New System.Drawing.Size(880, 32)
+        pnlMensajeExito.TabIndex = 4
+        pnlMensajeExito.Visible = False
+        ' 
+        ' lblMensajeExito
+        ' 
+        lblMensajeExito.Dock = System.Windows.Forms.DockStyle.Fill
+        lblMensajeExito.Font = New System.Drawing.Font("Segoe UI", 9.0F, Drawing.FontStyle.Bold)
+        lblMensajeExito.ForeColor = Drawing.Color.FromArgb(CByte(21), CByte(87), CByte(36))
+        lblMensajeExito.Location = New System.Drawing.Point(0, 0)
+        lblMensajeExito.Name = "lblMensajeExito"
+        lblMensajeExito.Size = New System.Drawing.Size(878, 30)
+        lblMensajeExito.TabIndex = 0
+        lblMensajeExito.Text = "✓ Reporte generado correctamente."
+        lblMensajeExito.TextAlign = Drawing.ContentAlignment.MiddleCenter
+        ' 
+        ' pnlMensajeError
+        ' 
+        pnlMensajeError.BackColor = Drawing.Color.FromArgb(CByte(248), CByte(215), CByte(218))
+        pnlMensajeError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        pnlMensajeError.Controls.Add(lblMensajeError)
+        pnlMensajeError.Location = New System.Drawing.Point(20, 506)
+        pnlMensajeError.Name = "pnlMensajeError"
+        pnlMensajeError.Size = New System.Drawing.Size(880, 32)
+        pnlMensajeError.TabIndex = 5
+        pnlMensajeError.Visible = False
+        ' 
+        ' lblMensajeError
+        ' 
+        lblMensajeError.Dock = System.Windows.Forms.DockStyle.Fill
+        lblMensajeError.Font = New System.Drawing.Font("Segoe UI", 9.0F, Drawing.FontStyle.Bold)
+        lblMensajeError.ForeColor = Drawing.Color.FromArgb(CByte(114), CByte(28), CByte(36))
+        lblMensajeError.Location = New System.Drawing.Point(0, 0)
+        lblMensajeError.Name = "lblMensajeError"
+        lblMensajeError.Size = New System.Drawing.Size(878, 30)
+        lblMensajeError.TabIndex = 0
+        lblMensajeError.Text = "⚠ No existen reservas ni estadías para el período seleccionado."
+        lblMensajeError.TextAlign = Drawing.ContentAlignment.MiddleCenter
+        ' 
+        ' prtDoc
+        ' 
+        ' 
+        ' prtDialog
+        ' 
+        prtDialog.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        prtDialog.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        prtDialog.ClientSize = New System.Drawing.Size(400, 300)
+        prtDialog.Document = prtDoc
+        prtDialog.Enabled = True
+        prtDialog.Icon = CType(resources.GetObject("prtDialog.Icon"), Drawing.Icon)
+        prtDialog.Name = "prtDialog"
+        prtDialog.Visible = False
+        ' 
+        ' FrmGestionReservas
+        ' 
+        AutoScaleDimensions = New System.Drawing.SizeF(7.0F, 15.0F)
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        BackColor = Drawing.Color.FromArgb(CByte(245), CByte(246), CByte(248))
+        ClientSize = New System.Drawing.Size(920, 560)
+        Controls.Add(pnlHeader)
+        Controls.Add(grpBusqueda)
+        Controls.Add(dgvReservas)
+        Controls.Add(grpEstadisticas)
+        Controls.Add(pnlMensajeExito)
+        Controls.Add(pnlMensajeError)
+        Font = New System.Drawing.Font("Segoe UI", 9.0F)
+        FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        MaximizeBox = False
+        Name = "FrmGestionReservas"
+        StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Text = "Gestión y Reporte de Reservas - Hotel Tekoha"
+        pnlHeader.ResumeLayout(False)
+        pnlHeader.PerformLayout()
+        CType(picIconoHeader, ComponentModel.ISupportInitialize).EndInit()
+        grpBusqueda.ResumeLayout(False)
+        grpBusqueda.PerformLayout()
+        CType(dgvReservas, ComponentModel.ISupportInitialize).EndInit()
+        grpEstadisticas.ResumeLayout(False)
+        grpEstadisticas.PerformLayout()
+        pnlMensajeExito.ResumeLayout(False)
+        pnlMensajeError.ResumeLayout(False)
+        ResumeLayout(False)
     End Sub
 End Class

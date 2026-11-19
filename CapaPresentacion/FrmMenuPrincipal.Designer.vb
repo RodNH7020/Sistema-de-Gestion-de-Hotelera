@@ -17,353 +17,367 @@ Partial Class FrmMenuPrincipal
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TMenu = New System.Windows.Forms.Label()
-        Me.pnlBarraUsuario = New System.Windows.Forms.Panel()
-        Me.lblUsuarioActivo = New System.Windows.Forms.Label()
-        Me.btnCerrarSesion = New System.Windows.Forms.Button()
-        Me.picRegistrar = New System.Windows.Forms.PictureBox()
-        Me.btnMenuRegistrar = New System.Windows.Forms.Button()
-        Me.picAnular = New System.Windows.Forms.PictureBox()
-        Me.btnMenuAnular = New System.Windows.Forms.Button()
-        Me.picCheckInOut = New System.Windows.Forms.PictureBox()
-        Me.btnMenuCheckInOut = New System.Windows.Forms.Button()
-        Me.picHabitaciones = New System.Windows.Forms.PictureBox()
-        Me.btnMenuHabitaciones = New System.Windows.Forms.Button()
-        Me.picEmitirFactura = New System.Windows.Forms.PictureBox()
-        Me.btnMenuEmitirFactura = New System.Windows.Forms.Button()
-        Me.picGestionReservas = New System.Windows.Forms.PictureBox()
-        Me.btnMenuGestionReservas = New System.Windows.Forms.Button()
-        Me.picRegistrarPago = New System.Windows.Forms.PictureBox()
-        Me.btnMenuRegistrarPago = New System.Windows.Forms.Button()
-        Me.picOpcion8 = New System.Windows.Forms.PictureBox()
-        Me.btnOpcion8 = New System.Windows.Forms.Button()
-
-        Me.Panel1.SuspendLayout()
-        Me.pnlBarraUsuario.SuspendLayout()
-        CType(Me.picRegistrar, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picAnular, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picCheckInOut, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picHabitaciones, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picEmitirFactura, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picGestionReservas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picRegistrarPago, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picOpcion8, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-
-        ' =========================================================
-        ' 1. BARRA SUPERIOR NEGRA
-        ' =========================================================
-        Me.Panel1.BackColor = System.Drawing.Color.Black
-        Me.Panel1.Controls.Add(Me.TMenu)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(920, 60)
-        Me.Panel1.TabIndex = 0
-
-        Me.TMenu.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TMenu.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold)
-        Me.TMenu.ForeColor = System.Drawing.Color.White
-        Me.TMenu.Location = New System.Drawing.Point(0, 0)
-        Me.TMenu.Name = "TMenu"
-        Me.TMenu.Size = New System.Drawing.Size(920, 60)
-        Me.TMenu.Text = "HOTEL TEKOHA - Menú Principal"
-        Me.TMenu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-
-        ' =========================================================
-        ' 2. FRANJA DE USUARIO ACTIVO Y CERRAR SESIÓN (#282828)
-        ' =========================================================
-        Me.pnlBarraUsuario.BackColor = System.Drawing.Color.FromArgb(40, 40, 40)
-        Me.pnlBarraUsuario.Controls.Add(Me.lblUsuarioActivo)
-        Me.pnlBarraUsuario.Controls.Add(Me.btnCerrarSesion)
-        Me.pnlBarraUsuario.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlBarraUsuario.Location = New System.Drawing.Point(0, 60)
-        Me.pnlBarraUsuario.Name = "pnlBarraUsuario"
-        Me.pnlBarraUsuario.Size = New System.Drawing.Size(920, 40)
-        Me.pnlBarraUsuario.TabIndex = 1
-
-        Me.lblUsuarioActivo.AutoSize = True
-        Me.lblUsuarioActivo.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.lblUsuarioActivo.ForeColor = System.Drawing.Color.White
-        Me.lblUsuarioActivo.Location = New System.Drawing.Point(45, 11)
-        Me.lblUsuarioActivo.Name = "lblUsuarioActivo"
-        Me.lblUsuarioActivo.Size = New System.Drawing.Size(270, 19)
-        Me.lblUsuarioActivo.TabIndex = 0
-        Me.lblUsuarioActivo.Text = "Usuario: Rodrigo   |   Rol: Administrador"
-
-        Me.btnCerrarSesion.BackColor = System.Drawing.Color.Crimson
-        Me.btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrarSesion.FlatAppearance.BorderSize = 0
-        Me.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrarSesion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnCerrarSesion.ForeColor = System.Drawing.Color.White
-        Me.btnCerrarSesion.Location = New System.Drawing.Point(755, 6)
-        Me.btnCerrarSesion.Name = "btnCerrarSesion"
-        Me.btnCerrarSesion.Size = New System.Drawing.Size(120, 28)
-        Me.btnCerrarSesion.TabIndex = 1
-        Me.btnCerrarSesion.Text = "Cerrar sesión"
-        Me.btnCerrarSesion.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 1 - COLUMNA 1: REGISTRAR RESERVA
-        ' =========================================================
-        Me.picRegistrar.BackColor = System.Drawing.Color.White
-        Me.picRegistrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picRegistrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picRegistrar.Location = New System.Drawing.Point(45, 130)
-        Me.picRegistrar.Name = "picRegistrar"
-        Me.picRegistrar.Padding = New System.Windows.Forms.Padding(10)
-        Me.picRegistrar.Size = New System.Drawing.Size(185, 130)
-        Me.picRegistrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picRegistrar.TabIndex = 2
-        Me.picRegistrar.TabStop = False
-
-        Me.btnMenuRegistrar.BackColor = System.Drawing.Color.Crimson
-        Me.btnMenuRegistrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMenuRegistrar.FlatAppearance.BorderSize = 0
-        Me.btnMenuRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMenuRegistrar.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMenuRegistrar.ForeColor = System.Drawing.Color.White
-        Me.btnMenuRegistrar.Location = New System.Drawing.Point(45, 265)
-        Me.btnMenuRegistrar.Name = "btnMenuRegistrar"
-        Me.btnMenuRegistrar.Size = New System.Drawing.Size(185, 42)
-        Me.btnMenuRegistrar.TabIndex = 3
-        Me.btnMenuRegistrar.Text = "Registrar Reserva"
-        Me.btnMenuRegistrar.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 1 - COLUMNA 2: ANULAR RESERVA
-        ' =========================================================
-        Me.picAnular.BackColor = System.Drawing.Color.White
-        Me.picAnular.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picAnular.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picAnular.Location = New System.Drawing.Point(260, 130)
-        Me.picAnular.Name = "picAnular"
-        Me.picAnular.Padding = New System.Windows.Forms.Padding(10)
-        Me.picAnular.Size = New System.Drawing.Size(185, 130)
-        Me.picAnular.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picAnular.TabIndex = 4
-        Me.picAnular.TabStop = False
-
-        Me.btnMenuAnular.BackColor = System.Drawing.Color.Crimson
-        Me.btnMenuAnular.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMenuAnular.FlatAppearance.BorderSize = 0
-        Me.btnMenuAnular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMenuAnular.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMenuAnular.ForeColor = System.Drawing.Color.White
-        Me.btnMenuAnular.Location = New System.Drawing.Point(260, 265)
-        Me.btnMenuAnular.Name = "btnMenuAnular"
-        Me.btnMenuAnular.Size = New System.Drawing.Size(185, 42)
-        Me.btnMenuAnular.TabIndex = 5
-        Me.btnMenuAnular.Text = "Anular Reserva"
-        Me.btnMenuAnular.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 1 - COLUMNA 3: OPCIÓN 3
-        ' =========================================================
-        Me.picCheckInOut.BackColor = System.Drawing.Color.White
-        Me.picCheckInOut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picCheckInOut.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picCheckInOut.Location = New System.Drawing.Point(475, 130)
-        Me.picCheckInOut.Name = "picCheckInOut"
-        Me.picCheckInOut.Padding = New System.Windows.Forms.Padding(10)
-        Me.picCheckInOut.Size = New System.Drawing.Size(185, 130)
-        Me.picCheckInOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picCheckInOut.TabIndex = 6
-        Me.picCheckInOut.TabStop = False
-
-        Me.btnMenuCheckInOut.BackColor = System.Drawing.Color.Crimson
-        Me.btnMenuCheckInOut.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMenuCheckInOut.FlatAppearance.BorderSize = 0
-        Me.btnMenuCheckInOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMenuCheckInOut.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMenuCheckInOut.ForeColor = System.Drawing.Color.White
-        Me.btnMenuCheckInOut.Location = New System.Drawing.Point(475, 265)
-        Me.btnMenuCheckInOut.Name = "btnMenuCheckInOut"
-        Me.btnMenuCheckInOut.Size = New System.Drawing.Size(185, 42)
-        Me.btnMenuCheckInOut.TabIndex = 7
-        Me.btnMenuCheckInOut.Text = "Opción 3"
-        Me.btnMenuCheckInOut.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 1 - COLUMNA 4: OPCIÓN 4
-        ' =========================================================
-        Me.picHabitaciones.BackColor = System.Drawing.Color.White
-        Me.picHabitaciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picHabitaciones.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picHabitaciones.Location = New System.Drawing.Point(690, 130)
-        Me.picHabitaciones.Name = "picHabitaciones"
-        Me.picHabitaciones.Padding = New System.Windows.Forms.Padding(10)
-        Me.picHabitaciones.Size = New System.Drawing.Size(185, 130)
-        Me.picHabitaciones.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picHabitaciones.TabIndex = 8
-        Me.picHabitaciones.TabStop = False
-
-        Me.btnMenuHabitaciones.BackColor = System.Drawing.Color.Crimson
-        Me.btnMenuHabitaciones.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMenuHabitaciones.FlatAppearance.BorderSize = 0
-        Me.btnMenuHabitaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMenuHabitaciones.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMenuHabitaciones.ForeColor = System.Drawing.Color.White
-        Me.btnMenuHabitaciones.Location = New System.Drawing.Point(690, 265)
-        Me.btnMenuHabitaciones.Name = "btnMenuHabitaciones"
-        Me.btnMenuHabitaciones.Size = New System.Drawing.Size(185, 42)
-        Me.btnMenuHabitaciones.TabIndex = 9
-        Me.btnMenuHabitaciones.Text = "Opción 4"
-        Me.btnMenuHabitaciones.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 2 - COLUMNA 1: EMITIR FACTURA
-        ' =========================================================
-        Me.picEmitirFactura.BackColor = System.Drawing.Color.White
-        Me.picEmitirFactura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picEmitirFactura.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picEmitirFactura.Location = New System.Drawing.Point(45, 340)
-        Me.picEmitirFactura.Name = "picEmitirFactura"
-        Me.picEmitirFactura.Padding = New System.Windows.Forms.Padding(10)
-        Me.picEmitirFactura.Size = New System.Drawing.Size(185, 130)
-        Me.picEmitirFactura.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picEmitirFactura.TabIndex = 10
-        Me.picEmitirFactura.TabStop = False
-
-        Me.btnMenuEmitirFactura.BackColor = System.Drawing.Color.Crimson
-        Me.btnMenuEmitirFactura.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMenuEmitirFactura.FlatAppearance.BorderSize = 0
-        Me.btnMenuEmitirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMenuEmitirFactura.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMenuEmitirFactura.ForeColor = System.Drawing.Color.White
-        Me.btnMenuEmitirFactura.Location = New System.Drawing.Point(45, 475)
-        Me.btnMenuEmitirFactura.Name = "btnMenuEmitirFactura"
-        Me.btnMenuEmitirFactura.Size = New System.Drawing.Size(185, 42)
-        Me.btnMenuEmitirFactura.TabIndex = 11
-        Me.btnMenuEmitirFactura.Text = "Emitir Factura"
-        Me.btnMenuEmitirFactura.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 2 - COLUMNA 2: GESTIÓN RESERVAS
-        ' =========================================================
-        Me.picGestionReservas.BackColor = System.Drawing.Color.White
-        Me.picGestionReservas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picGestionReservas.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picGestionReservas.Location = New System.Drawing.Point(260, 340)
-        Me.picGestionReservas.Name = "picGestionReservas"
-        Me.picGestionReservas.Padding = New System.Windows.Forms.Padding(10)
-        Me.picGestionReservas.Size = New System.Drawing.Size(185, 130)
-        Me.picGestionReservas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picGestionReservas.TabIndex = 12
-        Me.picGestionReservas.TabStop = False
-
-        Me.btnMenuGestionReservas.BackColor = System.Drawing.Color.Crimson
-        Me.btnMenuGestionReservas.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMenuGestionReservas.FlatAppearance.BorderSize = 0
-        Me.btnMenuGestionReservas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMenuGestionReservas.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMenuGestionReservas.ForeColor = System.Drawing.Color.White
-        Me.btnMenuGestionReservas.Location = New System.Drawing.Point(260, 475)
-        Me.btnMenuGestionReservas.Name = "btnMenuGestionReservas"
-        Me.btnMenuGestionReservas.Size = New System.Drawing.Size(185, 42)
-        Me.btnMenuGestionReservas.TabIndex = 13
-        Me.btnMenuGestionReservas.Text = "Gestión Reservas"
-        Me.btnMenuGestionReservas.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 2 - COLUMNA 3: OPCIÓN 7
-        ' =========================================================
-        Me.picRegistrarPago.BackColor = System.Drawing.Color.White
-        Me.picRegistrarPago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picRegistrarPago.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picRegistrarPago.Location = New System.Drawing.Point(475, 340)
-        Me.picRegistrarPago.Name = "picRegistrarPago"
-        Me.picRegistrarPago.Padding = New System.Windows.Forms.Padding(10)
-        Me.picRegistrarPago.Size = New System.Drawing.Size(185, 130)
-        Me.picRegistrarPago.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picRegistrarPago.TabIndex = 14
-        Me.picRegistrarPago.TabStop = False
-
-        Me.btnMenuRegistrarPago.BackColor = System.Drawing.Color.Crimson
-        Me.btnMenuRegistrarPago.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMenuRegistrarPago.FlatAppearance.BorderSize = 0
-        Me.btnMenuRegistrarPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMenuRegistrarPago.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMenuRegistrarPago.ForeColor = System.Drawing.Color.White
-        Me.btnMenuRegistrarPago.Location = New System.Drawing.Point(475, 475)
-        Me.btnMenuRegistrarPago.Name = "btnMenuRegistrarPago"
-        Me.btnMenuRegistrarPago.Size = New System.Drawing.Size(185, 42)
-        Me.btnMenuRegistrarPago.TabIndex = 15
-        Me.btnMenuRegistrarPago.Text = "Opción 7"
-        Me.btnMenuRegistrarPago.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' FILA 2 - COLUMNA 4: OPCIÓN 8
-        ' =========================================================
-        Me.picOpcion8.BackColor = System.Drawing.Color.White
-        Me.picOpcion8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picOpcion8.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picOpcion8.Location = New System.Drawing.Point(690, 340)
-        Me.picOpcion8.Name = "picOpcion8"
-        Me.picOpcion8.Padding = New System.Windows.Forms.Padding(10)
-        Me.picOpcion8.Size = New System.Drawing.Size(185, 130)
-        Me.picOpcion8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picOpcion8.TabIndex = 16
-        Me.picOpcion8.TabStop = False
-
-        Me.btnOpcion8.BackColor = System.Drawing.Color.Crimson
-        Me.btnOpcion8.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnOpcion8.FlatAppearance.BorderSize = 0
-        Me.btnOpcion8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnOpcion8.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnOpcion8.ForeColor = System.Drawing.Color.White
-        Me.btnOpcion8.Location = New System.Drawing.Point(690, 475)
-        Me.btnOpcion8.Name = "btnOpcion8"
-        Me.btnOpcion8.Size = New System.Drawing.Size(185, 42)
-        Me.btnOpcion8.TabIndex = 17
-        Me.btnOpcion8.Text = "Opción 8"
-        Me.btnOpcion8.UseVisualStyleBackColor = False
-
-        ' =========================================================
-        ' VENTANA PRINCIPAL
-        ' =========================================================
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(242, 242, 242)
-        Me.ClientSize = New System.Drawing.Size(920, 560)
-        Me.Controls.Add(Me.btnOpcion8)
-        Me.Controls.Add(Me.picOpcion8)
-        Me.Controls.Add(Me.btnMenuRegistrarPago)
-        Me.Controls.Add(Me.picRegistrarPago)
-        Me.Controls.Add(Me.btnMenuGestionReservas)
-        Me.Controls.Add(Me.picGestionReservas)
-        Me.Controls.Add(Me.btnMenuEmitirFactura)
-        Me.Controls.Add(Me.picEmitirFactura)
-        Me.Controls.Add(Me.btnMenuHabitaciones)
-        Me.Controls.Add(Me.picHabitaciones)
-        Me.Controls.Add(Me.btnMenuCheckInOut)
-        Me.Controls.Add(Me.picCheckInOut)
-        Me.Controls.Add(Me.btnMenuAnular)
-        Me.Controls.Add(Me.picAnular)
-        Me.Controls.Add(Me.btnMenuRegistrar)
-        Me.Controls.Add(Me.picRegistrar)
-        Me.Controls.Add(Me.pnlBarraUsuario)
-        Me.Controls.Add(Me.Panel1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.MaximizeBox = False
-        Me.Name = "FrmMenuPrincipal"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Menú Principal - Hotel Tekoha"
-
-        Me.Panel1.ResumeLayout(False)
-        Me.pnlBarraUsuario.ResumeLayout(False)
-        Me.pnlBarraUsuario.PerformLayout()
-        CType(Me.picRegistrar, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picAnular, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picCheckInOut, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picHabitaciones, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picEmitirFactura, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picGestionReservas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picRegistrarPago, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picOpcion8, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
+        Panel1 = New System.Windows.Forms.Panel()
+        TMenu = New System.Windows.Forms.Label()
+        pnlBarraUsuario = New System.Windows.Forms.Panel()
+        lblUsuarioActivo = New System.Windows.Forms.Label()
+        btnCerrarSesion = New System.Windows.Forms.Button()
+        picRegistrar = New System.Windows.Forms.PictureBox()
+        btnMenuRegistrar = New System.Windows.Forms.Button()
+        picAnular = New System.Windows.Forms.PictureBox()
+        btnMenuAnular = New System.Windows.Forms.Button()
+        picCheckInOut = New System.Windows.Forms.PictureBox()
+        btnMenuCheckInOut = New System.Windows.Forms.Button()
+        picHabitaciones = New System.Windows.Forms.PictureBox()
+        btnMenuHabitaciones = New System.Windows.Forms.Button()
+        picEmitirFactura = New System.Windows.Forms.PictureBox()
+        btnMenuEmitirFactura = New System.Windows.Forms.Button()
+        picGestionReservas = New System.Windows.Forms.PictureBox()
+        btnMenuGestionReservas = New System.Windows.Forms.Button()
+        picRegistrarPago = New System.Windows.Forms.PictureBox()
+        btnMenuRegistrarPago = New System.Windows.Forms.Button()
+        picOpcion8 = New System.Windows.Forms.PictureBox()
+        btnOpcion8 = New System.Windows.Forms.Button()
+        Panel1.SuspendLayout()
+        pnlBarraUsuario.SuspendLayout()
+        CType(picRegistrar, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picAnular, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picCheckInOut, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picHabitaciones, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picEmitirFactura, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picGestionReservas, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picRegistrarPago, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picOpcion8, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' Panel1
+        ' 
+        Panel1.BackColor = Drawing.Color.Black
+        Panel1.Controls.Add(TMenu)
+        Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Panel1.Location = New System.Drawing.Point(0, 0)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New System.Drawing.Size(920, 60)
+        Panel1.TabIndex = 0
+        ' 
+        ' TMenu
+        ' 
+        TMenu.Dock = System.Windows.Forms.DockStyle.Fill
+        TMenu.Font = New System.Drawing.Font("Segoe UI", 18F, Drawing.FontStyle.Bold)
+        TMenu.ForeColor = Drawing.Color.White
+        TMenu.Location = New System.Drawing.Point(0, 0)
+        TMenu.Name = "TMenu"
+        TMenu.Size = New System.Drawing.Size(920, 60)
+        TMenu.TabIndex = 0
+        TMenu.Text = "HOTEL TEKOHA - Menú Principal"
+        TMenu.TextAlign = Drawing.ContentAlignment.MiddleCenter
+        ' 
+        ' pnlBarraUsuario
+        ' 
+        pnlBarraUsuario.BackColor = Drawing.Color.FromArgb(CByte(40), CByte(40), CByte(40))
+        pnlBarraUsuario.Controls.Add(lblUsuarioActivo)
+        pnlBarraUsuario.Controls.Add(btnCerrarSesion)
+        pnlBarraUsuario.Dock = System.Windows.Forms.DockStyle.Top
+        pnlBarraUsuario.Location = New System.Drawing.Point(0, 60)
+        pnlBarraUsuario.Name = "pnlBarraUsuario"
+        pnlBarraUsuario.Size = New System.Drawing.Size(920, 40)
+        pnlBarraUsuario.TabIndex = 1
+        ' 
+        ' lblUsuarioActivo
+        ' 
+        lblUsuarioActivo.AutoSize = True
+        lblUsuarioActivo.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        lblUsuarioActivo.ForeColor = Drawing.Color.White
+        lblUsuarioActivo.Location = New System.Drawing.Point(45, 11)
+        lblUsuarioActivo.Name = "lblUsuarioActivo"
+        lblUsuarioActivo.Size = New System.Drawing.Size(279, 19)
+        lblUsuarioActivo.TabIndex = 0
+        lblUsuarioActivo.Text = "Usuario: Rodrigo   |   Rol: Administrador"
+        ' 
+        ' btnCerrarSesion
+        ' 
+        btnCerrarSesion.BackColor = Drawing.Color.Crimson
+        btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand
+        btnCerrarSesion.FlatAppearance.BorderSize = 0
+        btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnCerrarSesion.Font = New System.Drawing.Font("Segoe UI", 9F, Drawing.FontStyle.Bold)
+        btnCerrarSesion.ForeColor = Drawing.Color.White
+        btnCerrarSesion.Location = New System.Drawing.Point(755, 6)
+        btnCerrarSesion.Name = "btnCerrarSesion"
+        btnCerrarSesion.Size = New System.Drawing.Size(120, 28)
+        btnCerrarSesion.TabIndex = 1
+        btnCerrarSesion.Text = "Cerrar sesión"
+        btnCerrarSesion.UseVisualStyleBackColor = False
+        ' 
+        ' picRegistrar
+        ' 
+        picRegistrar.BackColor = Drawing.Color.White
+        picRegistrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picRegistrar.Cursor = System.Windows.Forms.Cursors.Hand
+        picRegistrar.Image = My.Resources.Resources.Gemini_Generated_Image_gxlu2jgxlu2jgxlu__1_
+        picRegistrar.Location = New System.Drawing.Point(45, 130)
+        picRegistrar.Name = "picRegistrar"
+        picRegistrar.Padding = New System.Windows.Forms.Padding(10)
+        picRegistrar.Size = New System.Drawing.Size(185, 130)
+        picRegistrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picRegistrar.TabIndex = 2
+        picRegistrar.TabStop = False
+        ' 
+        ' btnMenuRegistrar
+        ' 
+        btnMenuRegistrar.BackColor = Drawing.Color.Crimson
+        btnMenuRegistrar.Cursor = System.Windows.Forms.Cursors.Hand
+        btnMenuRegistrar.FlatAppearance.BorderSize = 0
+        btnMenuRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnMenuRegistrar.Font = New System.Drawing.Font("Segoe UI", 10.0F, Drawing.FontStyle.Bold)
+        btnMenuRegistrar.ForeColor = Drawing.Color.White
+        btnMenuRegistrar.Location = New System.Drawing.Point(45, 265)
+        btnMenuRegistrar.Name = "btnMenuRegistrar"
+        btnMenuRegistrar.Size = New System.Drawing.Size(185, 42)
+        btnMenuRegistrar.TabIndex = 3
+        btnMenuRegistrar.Text = "Registrar Reserva"
+        btnMenuRegistrar.UseVisualStyleBackColor = False
+        ' 
+        ' picAnular
+        ' 
+        picAnular.BackColor = Drawing.Color.White
+        picAnular.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picAnular.Cursor = System.Windows.Forms.Cursors.Hand
+        picAnular.Image = My.Resources.Resources.Gemini_Generated_Image_xzk5mixzk5mixzk5
+        picAnular.Location = New System.Drawing.Point(260, 130)
+        picAnular.Name = "picAnular"
+        picAnular.Padding = New System.Windows.Forms.Padding(10)
+        picAnular.Size = New System.Drawing.Size(185, 130)
+        picAnular.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picAnular.TabIndex = 4
+        picAnular.TabStop = False
+        ' 
+        ' btnMenuAnular
+        ' 
+        btnMenuAnular.BackColor = Drawing.Color.Crimson
+        btnMenuAnular.Cursor = System.Windows.Forms.Cursors.Hand
+        btnMenuAnular.FlatAppearance.BorderSize = 0
+        btnMenuAnular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnMenuAnular.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        btnMenuAnular.ForeColor = Drawing.Color.White
+        btnMenuAnular.Location = New System.Drawing.Point(260, 265)
+        btnMenuAnular.Name = "btnMenuAnular"
+        btnMenuAnular.Size = New System.Drawing.Size(185, 42)
+        btnMenuAnular.TabIndex = 5
+        btnMenuAnular.Text = "Anular Reserva"
+        btnMenuAnular.UseVisualStyleBackColor = False
+        ' 
+        ' picCheckInOut
+        ' 
+        picCheckInOut.BackColor = Drawing.Color.White
+        picCheckInOut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picCheckInOut.Cursor = System.Windows.Forms.Cursors.Hand
+        picCheckInOut.Location = New System.Drawing.Point(475, 130)
+        picCheckInOut.Name = "picCheckInOut"
+        picCheckInOut.Padding = New System.Windows.Forms.Padding(10)
+        picCheckInOut.Size = New System.Drawing.Size(185, 130)
+        picCheckInOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picCheckInOut.TabIndex = 6
+        picCheckInOut.TabStop = False
+        ' 
+        ' btnMenuCheckInOut
+        ' 
+        btnMenuCheckInOut.BackColor = Drawing.Color.Crimson
+        btnMenuCheckInOut.Cursor = System.Windows.Forms.Cursors.Hand
+        btnMenuCheckInOut.FlatAppearance.BorderSize = 0
+        btnMenuCheckInOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnMenuCheckInOut.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        btnMenuCheckInOut.ForeColor = Drawing.Color.White
+        btnMenuCheckInOut.Location = New System.Drawing.Point(475, 265)
+        btnMenuCheckInOut.Name = "btnMenuCheckInOut"
+        btnMenuCheckInOut.Size = New System.Drawing.Size(185, 42)
+        btnMenuCheckInOut.TabIndex = 7
+        btnMenuCheckInOut.Text = "Opción 3"
+        btnMenuCheckInOut.UseVisualStyleBackColor = False
+        ' 
+        ' picHabitaciones
+        ' 
+        picHabitaciones.BackColor = Drawing.Color.White
+        picHabitaciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picHabitaciones.Cursor = System.Windows.Forms.Cursors.Hand
+        picHabitaciones.Location = New System.Drawing.Point(690, 130)
+        picHabitaciones.Name = "picHabitaciones"
+        picHabitaciones.Padding = New System.Windows.Forms.Padding(10)
+        picHabitaciones.Size = New System.Drawing.Size(185, 130)
+        picHabitaciones.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picHabitaciones.TabIndex = 8
+        picHabitaciones.TabStop = False
+        ' 
+        ' btnMenuHabitaciones
+        ' 
+        btnMenuHabitaciones.BackColor = Drawing.Color.Crimson
+        btnMenuHabitaciones.Cursor = System.Windows.Forms.Cursors.Hand
+        btnMenuHabitaciones.FlatAppearance.BorderSize = 0
+        btnMenuHabitaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnMenuHabitaciones.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        btnMenuHabitaciones.ForeColor = Drawing.Color.White
+        btnMenuHabitaciones.Location = New System.Drawing.Point(690, 265)
+        btnMenuHabitaciones.Name = "btnMenuHabitaciones"
+        btnMenuHabitaciones.Size = New System.Drawing.Size(185, 42)
+        btnMenuHabitaciones.TabIndex = 9
+        btnMenuHabitaciones.Text = "Opción 4"
+        btnMenuHabitaciones.UseVisualStyleBackColor = False
+        ' 
+        ' picEmitirFactura
+        ' 
+        picEmitirFactura.BackColor = Drawing.Color.White
+        picEmitirFactura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picEmitirFactura.Cursor = System.Windows.Forms.Cursors.Hand
+        picEmitirFactura.Image = My.Resources.Resources.Factura1
+        picEmitirFactura.Location = New System.Drawing.Point(45, 340)
+        picEmitirFactura.Name = "picEmitirFactura"
+        picEmitirFactura.Padding = New System.Windows.Forms.Padding(10)
+        picEmitirFactura.Size = New System.Drawing.Size(185, 130)
+        picEmitirFactura.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picEmitirFactura.TabIndex = 10
+        picEmitirFactura.TabStop = False
+        ' 
+        ' btnMenuEmitirFactura
+        ' 
+        btnMenuEmitirFactura.BackColor = Drawing.Color.Crimson
+        btnMenuEmitirFactura.Cursor = System.Windows.Forms.Cursors.Hand
+        btnMenuEmitirFactura.FlatAppearance.BorderSize = 0
+        btnMenuEmitirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnMenuEmitirFactura.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        btnMenuEmitirFactura.ForeColor = Drawing.Color.White
+        btnMenuEmitirFactura.Location = New System.Drawing.Point(45, 475)
+        btnMenuEmitirFactura.Name = "btnMenuEmitirFactura"
+        btnMenuEmitirFactura.Size = New System.Drawing.Size(185, 42)
+        btnMenuEmitirFactura.TabIndex = 11
+        btnMenuEmitirFactura.Text = "Emitir Factura"
+        btnMenuEmitirFactura.UseVisualStyleBackColor = False
+        ' 
+        ' picGestionReservas
+        ' 
+        picGestionReservas.BackColor = Drawing.Color.White
+        picGestionReservas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picGestionReservas.Cursor = System.Windows.Forms.Cursors.Hand
+        picGestionReservas.Image = My.Resources.Resources.Gestion_reserva1
+        picGestionReservas.Location = New System.Drawing.Point(260, 340)
+        picGestionReservas.Name = "picGestionReservas"
+        picGestionReservas.Padding = New System.Windows.Forms.Padding(10)
+        picGestionReservas.Size = New System.Drawing.Size(185, 130)
+        picGestionReservas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picGestionReservas.TabIndex = 12
+        picGestionReservas.TabStop = False
+        ' 
+        ' btnMenuGestionReservas
+        ' 
+        btnMenuGestionReservas.BackColor = Drawing.Color.Crimson
+        btnMenuGestionReservas.Cursor = System.Windows.Forms.Cursors.Hand
+        btnMenuGestionReservas.FlatAppearance.BorderSize = 0
+        btnMenuGestionReservas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnMenuGestionReservas.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        btnMenuGestionReservas.ForeColor = Drawing.Color.White
+        btnMenuGestionReservas.Location = New System.Drawing.Point(260, 475)
+        btnMenuGestionReservas.Name = "btnMenuGestionReservas"
+        btnMenuGestionReservas.Size = New System.Drawing.Size(185, 42)
+        btnMenuGestionReservas.TabIndex = 13
+        btnMenuGestionReservas.Text = "Gestión Reservas"
+        btnMenuGestionReservas.UseVisualStyleBackColor = False
+        ' 
+        ' picRegistrarPago
+        ' 
+        picRegistrarPago.BackColor = Drawing.Color.White
+        picRegistrarPago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picRegistrarPago.Cursor = System.Windows.Forms.Cursors.Hand
+        picRegistrarPago.Location = New System.Drawing.Point(475, 340)
+        picRegistrarPago.Name = "picRegistrarPago"
+        picRegistrarPago.Padding = New System.Windows.Forms.Padding(10)
+        picRegistrarPago.Size = New System.Drawing.Size(185, 130)
+        picRegistrarPago.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picRegistrarPago.TabIndex = 14
+        picRegistrarPago.TabStop = False
+        ' 
+        ' btnMenuRegistrarPago
+        ' 
+        btnMenuRegistrarPago.BackColor = Drawing.Color.Crimson
+        btnMenuRegistrarPago.Cursor = System.Windows.Forms.Cursors.Hand
+        btnMenuRegistrarPago.FlatAppearance.BorderSize = 0
+        btnMenuRegistrarPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnMenuRegistrarPago.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        btnMenuRegistrarPago.ForeColor = Drawing.Color.White
+        btnMenuRegistrarPago.Location = New System.Drawing.Point(475, 475)
+        btnMenuRegistrarPago.Name = "btnMenuRegistrarPago"
+        btnMenuRegistrarPago.Size = New System.Drawing.Size(185, 42)
+        btnMenuRegistrarPago.TabIndex = 15
+        btnMenuRegistrarPago.Text = "Opción 7"
+        btnMenuRegistrarPago.UseVisualStyleBackColor = False
+        ' 
+        ' picOpcion8
+        ' 
+        picOpcion8.BackColor = Drawing.Color.White
+        picOpcion8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        picOpcion8.Cursor = System.Windows.Forms.Cursors.Hand
+        picOpcion8.Location = New System.Drawing.Point(690, 340)
+        picOpcion8.Name = "picOpcion8"
+        picOpcion8.Padding = New System.Windows.Forms.Padding(10)
+        picOpcion8.Size = New System.Drawing.Size(185, 130)
+        picOpcion8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        picOpcion8.TabIndex = 16
+        picOpcion8.TabStop = False
+        ' 
+        ' btnOpcion8
+        ' 
+        btnOpcion8.BackColor = Drawing.Color.Crimson
+        btnOpcion8.Cursor = System.Windows.Forms.Cursors.Hand
+        btnOpcion8.FlatAppearance.BorderSize = 0
+        btnOpcion8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnOpcion8.Font = New System.Drawing.Font("Segoe UI", 10F, Drawing.FontStyle.Bold)
+        btnOpcion8.ForeColor = Drawing.Color.White
+        btnOpcion8.Location = New System.Drawing.Point(690, 475)
+        btnOpcion8.Name = "btnOpcion8"
+        btnOpcion8.Size = New System.Drawing.Size(185, 42)
+        btnOpcion8.TabIndex = 17
+        btnOpcion8.Text = "Opción 8"
+        btnOpcion8.UseVisualStyleBackColor = False
+        ' 
+        ' FrmMenuPrincipal
+        ' 
+        AutoScaleDimensions = New System.Drawing.SizeF(7F, 15F)
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        BackColor = Drawing.Color.FromArgb(CByte(242), CByte(242), CByte(242))
+        ClientSize = New System.Drawing.Size(920, 560)
+        Controls.Add(btnOpcion8)
+        Controls.Add(picOpcion8)
+        Controls.Add(btnMenuRegistrarPago)
+        Controls.Add(picRegistrarPago)
+        Controls.Add(btnMenuGestionReservas)
+        Controls.Add(picGestionReservas)
+        Controls.Add(btnMenuEmitirFactura)
+        Controls.Add(picEmitirFactura)
+        Controls.Add(btnMenuHabitaciones)
+        Controls.Add(picHabitaciones)
+        Controls.Add(btnMenuCheckInOut)
+        Controls.Add(picCheckInOut)
+        Controls.Add(btnMenuAnular)
+        Controls.Add(picAnular)
+        Controls.Add(btnMenuRegistrar)
+        Controls.Add(picRegistrar)
+        Controls.Add(pnlBarraUsuario)
+        Controls.Add(Panel1)
+        FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        MaximizeBox = False
+        Name = "FrmMenuPrincipal"
+        StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Text = "Menú Principal - Hotel Tekoha"
+        Panel1.ResumeLayout(False)
+        pnlBarraUsuario.ResumeLayout(False)
+        pnlBarraUsuario.PerformLayout()
+        CType(picRegistrar, ComponentModel.ISupportInitialize).EndInit()
+        CType(picAnular, ComponentModel.ISupportInitialize).EndInit()
+        CType(picCheckInOut, ComponentModel.ISupportInitialize).EndInit()
+        CType(picHabitaciones, ComponentModel.ISupportInitialize).EndInit()
+        CType(picEmitirFactura, ComponentModel.ISupportInitialize).EndInit()
+        CType(picGestionReservas, ComponentModel.ISupportInitialize).EndInit()
+        CType(picRegistrarPago, ComponentModel.ISupportInitialize).EndInit()
+        CType(picOpcion8, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
     End Sub
 
     Friend WithEvents Panel1 As System.Windows.Forms.Panel

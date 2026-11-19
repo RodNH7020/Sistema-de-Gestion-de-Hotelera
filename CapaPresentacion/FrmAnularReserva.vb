@@ -1,9 +1,16 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Drawing
+Imports System.Windows.Forms
 Imports CapaNegocio
 
 Public Class FrmAnularReserva
 
     Private Sub FrmAnularReserva_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.ClientSize = New Size(920, 560)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.Text = "Anular Reserva - Hotel Tekoha"
+
         ' Cargar todas las reservas activas al abrir la ventana
         CargarGrilla("")
     End Sub
